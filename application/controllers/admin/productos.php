@@ -6,6 +6,7 @@ class Productos extends CI_Controller {
     {
         parent::__construct();
         //$this->layout->setLayout('admin/headerMaster');
+        $this->load->helper(array('form', 'url'));
     }
 
     public function index()
@@ -46,10 +47,14 @@ class Productos extends CI_Controller {
     }
     
     public function guardar(){
+
+
+        
         if ($this->input->post()) {
 
+
             $this->load->model('admin/productos/productos_model','prod',TRUE);
-            
+
             $nombre = $this->input->post('inputNombre');
             $marca = $this->input->post('inputMarca');
             $descripcion = $this->input->post('inputDescripcion');
@@ -57,11 +62,41 @@ class Productos extends CI_Controller {
             $shortname = $this->input->post('inputShortName');
             $categoria = $this->input->post('inputCategoria');
 
-            $this->prod->insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria);
-            
-            redirect('admin/productos');
-            
+            $idProducto = $this->prod->insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria);
+
+
+            // Count # of uploaded files in array
+            $total = count($_FILES['upload']['name']);
+
+            // Loop through each file
+            for($i=0; $i<$total; $i++) {
+                //Get the temp file path
+                $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+
+                //Make sure we have a filepath
+                if ($tmpFilePath != ""){
+                    //Setup our new file path
+                    $newFilePath =  getcwd()."/uploads/" . $_FILES['upload']['name'][$i];
+
+                    //Upload the file into the temp dir
+                    if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+
+                        //Handle other code here
+
+                    }
+                }
+            }
+
+
         }
+
+
+
+
+    }
+
+    public function upload(){
+        
     }
 
     

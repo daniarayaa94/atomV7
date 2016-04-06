@@ -24,6 +24,12 @@ class Productos_model extends CI_Model {
         $this->idCategoria    = $categoria;
 
         $this->db->insert('producto', $this);
+
+        $id_producto = $this->db->insert_id();
+        
+        return $id_producto;
+
+
     }
 
     function update_entry()
