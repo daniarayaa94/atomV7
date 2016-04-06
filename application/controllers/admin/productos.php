@@ -76,12 +76,10 @@ class Productos extends CI_Controller {
                 //Make sure we have a filepath
                 if ($tmpFilePath != ""){
                     //Setup our new file path
-                    $newFilePath =  getcwd()."/uploads/" . $_FILES['upload']['name'][$i];
+                    $newFilePath =  getcwd()."/assets/" . $_FILES['upload']['name'][$i];
 
                     //Upload the file into the temp dir
                     if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-
-                        //Handle other code here
 
                     }
                 }

@@ -53,13 +53,14 @@ $route['default_controller'] = 'index';
 $route['404_override'] = '';
 
 /* Rutas para Frontend y Backend */
-$route['admin'] = 'admin/login';
-$route['admin/dashboard'] = 'admin/dashboard';
-$route['admin/(:any)'] = 'admin/$1';
+$route['admin']                            = 'admin/login';
+$route['admin/dashboard']                  = 'admin/dashboard';
+$route['admin/(:any)']                     = 'admin/$1';
 
-$route['frontend'] = 'frontend/index';
-$route['frontend/(:any)'] = 'frontend/$1';
+$route['frontend']                         = 'frontend/index';
+$route['frontend/(:any)']                  = 'frontend/$1';
 
-$route['(:any)'] = 'frontend/index';
+$route['(:any)']                           = 'frontend/index';
+
 
 $route['translate_uri_dashes'] = FALSE;

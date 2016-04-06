@@ -126,7 +126,7 @@
                     <div class="product-carousel">
                         <div class="single-product">
                             <div class="product-f-image">
-                                <img src="public/frontend/images/product-1.jpg" alt="">
+                                <img src="<?= base_url() ?>public/frontend/images/product-1.jpg" alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                     <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Detalles</a>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="single-product">
                             <div class="product-f-image">
-                                <img src="public/frontend/images/product-2.jpg" alt="">
+                                <img src="<?= base_url() ?>public/frontend/images/product-2.jpg" alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                     <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Detalles</a>
@@ -155,7 +155,7 @@
                         </div>
                         <div class="single-product">
                             <div class="product-f-image">
-                                <img src="public/frontend/images/product-3.jpg" alt="">
+                                <img src="<?= base_url() ?>public/frontend/images/product-3.jpg" alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                     <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Detalles</a>
@@ -170,7 +170,7 @@
                         </div>
                         <div class="single-product">
                             <div class="product-f-image">
-                                <img src="public/frontend/images/product-4.jpg" alt="">
+                                <img src="<?= base_url() ?>public/frontend/images/product-4.jpg" alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                     <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Detalles</a>
@@ -186,7 +186,7 @@
 
                         <div class="single-product">
                             <div class="product-f-image">
-                                <img src="public/frontend/images/product-5.jpg" alt="">
+                                <img src="<?= base_url() ?>public/frontend/images/product-5.jpg" alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                     <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Detalles</a>
@@ -201,7 +201,7 @@
 
                         <div class="single-product">
                             <div class="product-f-image">
-                                <img src="public/frontend/images/product-6.jpg" alt="">
+                                <img src="<?= base_url() ?>public/frontend/images/product-6.jpg" alt="">
                                 <div class="product-hover">
                                     <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                     <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> Detalles</a>
@@ -229,14 +229,14 @@
                 <div class="brand-wrapper">
                     <h2 class="section-title">Marcas</h2>
                     <div class="brand-list">
-                        <img src="public/frontend/images/services_logo__1.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__2.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__3.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__4.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__1.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__2.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__3.jpg" alt="">
-                        <img src="public/frontend/images/services_logo__4.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__1.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__2.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__3.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__4.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__1.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__2.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__3.jpg" alt="">
+                        <img src="<?= base_url() ?>public/frontend/images/services_logo__4.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -253,14 +253,14 @@
                     <h2 class="product-wid-title">Más Vendidos</h2>
                     <a href="" class="wid-view-more">ver todos</a>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-1.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
                         
                         <div class="product-wid-price">
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-2.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Apple new mac book 2015</a></h2>
                         <div class="product-wid-rating">
 
@@ -269,7 +269,7 @@
                         </div>
                     </div>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-3.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Apple new i phone 6</a></h2>
 
                         <div class="product-wid-price">
@@ -282,17 +282,17 @@
                     <h2 class="product-wid-title">Más cotizados</h2>
                     <a href="#" class="wid-view-more">Ver todos</a>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-4.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-4.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
 
                     </div>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-1.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
 
                     </div>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-2.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-2.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
 
                     </div>
@@ -303,17 +303,17 @@
                     <h2 class="product-wid-title">Más Nuevos</h2>
                     <a href="#" class="wid-view-more">Ver todos</a>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-3.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-3.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Apple new i phone 6</a></h2>
 
                     </div>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-4.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-4.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
 
                     </div>
                     <div class="single-wid-product">
-                        <a href="single-product.html"><img src="public/frontend/images/product-thumb-1.jpg" alt="" class="product-thumb"></a>
+                        <a href="single-product.html"><img src="<?= base_url() ?>public/frontend/images/product-thumb-1.jpg" alt="" class="product-thumb"></a>
                         <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
 
                     </div>
