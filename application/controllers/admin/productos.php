@@ -61,8 +61,7 @@ class Productos extends CI_Controller {
             $stock = $this->input->post('inputStock');
             $shortname = $this->input->post('inputShortName');
             $categoria = $this->input->post('inputCategoria');
-
-            $idProducto = $this->prod->insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria);
+            $imagenes = implode(";",$_FILES['upload']['name']);
 
 
             // Count # of uploaded files in array
@@ -71,6 +70,7 @@ class Productos extends CI_Controller {
             // Loop through each file
             for($i=0; $i<$total; $i++) {
                 //Get the temp file path
+
                 $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
 
                 //Make sure we have a filepath
@@ -84,6 +84,11 @@ class Productos extends CI_Controller {
                     }
                 }
             }
+
+
+            $this->prod->insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes);
+
+            redirect("admin/productos");
 
 
         }

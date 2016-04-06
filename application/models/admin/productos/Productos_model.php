@@ -14,12 +14,14 @@ class Productos_model extends CI_Model {
         
     }
 
-    function insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria)
+    function insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes)
     {
         $this->nombre   = $nombre;
         $this->marca = $marca;
         $this->descripcion    = $descripcion;
         $this->stock   = $stock;
+
+        $this->imagenes = $imagenes;
         $this->shortname = $shortname;
         $this->idCategoria    = $categoria;
 
