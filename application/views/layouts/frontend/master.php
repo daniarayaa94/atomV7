@@ -28,6 +28,52 @@
 </head>
 
 <body>
+<div class="site-branding-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="logo">
+                    <h1><b></b><a href="index.html">A<span><b>Tom</b></span></a></h1>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="shopping-item">
+                    <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End site branding area -->
+
+<div class="mainmenu-area">
+    <div class="container">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse nav1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="<?php echo base_url(); ?>"><?php echo $titulo; ?></a></li>
+                    <?php foreach ($categorias as $category ){ ?>
+                        <li><a href="<?php echo $cat.$category->idCategoria ; ?>"><?php echo $category->nombre; ?></a>
+                            <ul>
+                                <li><a href="">item1</a></li>
+                                <li><a href="">item1</a></li>
+                                <li><a href="">item1</a></li>
+                            </ul>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> <!-- End mainmenu area -->
 
 <?php echo $content_for_layout; ?>
 
@@ -35,10 +81,15 @@
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-about-us">
-                    <h2>e<span>Electronics</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                    <h2>A<span><b>TOM</b></b></span></h2>
+                    <p>
+                        Los clintes son nuestra inspiracion y sus satisfaccion nuestra meta.
+                        Buscamos entregar productos de calidad a precios convenientes y en el menor tiempo posibles,
+                        entendemos que si pide algo es porque lo necesitas y por ella, aseguramos que en 24hr tendrá
+                        sus productos en sus manos.
+                    </p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -49,42 +100,27 @@
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">User Navigation </h2>
+                    <h2 class="footer-wid-title">Servicio al Cliente</h2>
                     <ul>
-                        <li><a href="#">My account</a></li>
-                        <li><a href="#">Order history</a></li>
-                        <li><a href="#">Wishlist</a></li>
-                        <li><a href="#">Vendor contact</a></li>
-                        <li><a href="#">Front page</a></li>
+                        <li><a href="#">Despacho</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="#">Cómo Comprar</a></li>
+                        <li><a href="#">Condicionnes comerciales</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-4 col-sm-6">
                 <div class="footer-menu">
-                    <h2 class="footer-wid-title">Categories</h2>
+                    <h2 class="footer-wid-title">Contáctenos</h2>
                     <ul>
-                        <li><a href="#">Mobile Phone</a></li>
-                        <li><a href="#">Home accesseries</a></li>
-                        <li><a href="#">LED TV</a></li>
-                        <li><a href="#">Computer</a></li>
-                        <li><a href="#">Gadets</a></li>
+                        <li><h2 style="color: #00a65a">(2) 6785876</h2></li>
+                        <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=cotizaciones@atomoffice.cl">cotizaciones@atomoffice.cl</a></li>
+                        <li><a href="#">Av. Vickuña Mackenna #4589.</a></li>
+                        <li><a href="#">Lunes a Sábado 8:30-20:00</a></li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6">
-                <div class="footer-newsletter">
-                    <h2 class="footer-wid-title">Newsletter</h2>
-                    <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
-                    <div class="newsletter-form">
-                        <form action="#">
-                            <input type="email" placeholder="Type your email">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -96,16 +132,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="copyright">
-                    <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a href="http://wpexpand.com" target="_blank">WP Expand</a></p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="footer-card-icon">
-                    <i class="fa fa-cc-discover"></i>
-                    <i class="fa fa-cc-mastercard"></i>
-                    <i class="fa fa-cc-paypal"></i>
-                    <i class="fa fa-cc-visa"></i>
+                    <p>&copy; 2016 atom Office. Todos los derechos reservados. Creado con <i class="fa fa-heart"></i> por <a href="http://wpexpand.com" target="_blank">BlackRobot</a></p>
                 </div>
             </div>
         </div>
