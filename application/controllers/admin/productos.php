@@ -47,11 +47,8 @@ class Productos extends CI_Controller {
     }
     
     public function guardar(){
-
-
         
         if ($this->input->post()) {
-
 
             $this->load->model('admin/productos/productos_model','prod',TRUE);
 
@@ -61,35 +58,31 @@ class Productos extends CI_Controller {
             $stock = $this->input->post('inputStock');
             $shortname = $this->input->post('inputShortName');
             $categoria = $this->input->post('inputCategoria');
+
+            $precio = $this->input->post('inputPrecio');
+            $tipo = $this->input->post('inputTipo');
+            $fechaInicio = $this->input->post('inputDesde');
+            $fechaFin = $this->input->post('inputHasta');
+            
+
             $imagenes = implode(";",$_FILES['upload']['name']);
 
-
-            // Count # of uploaded files in array
             $total = count($_FILES['upload']['name']);
 
-            // Loop through each file
             for($i=0; $i<$total; $i++) {
-                //Get the temp file path
 
                 $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
 
-                //Make sure we have a filepath
                 if ($tmpFilePath != ""){
-                    //Setup our new file path
                     $newFilePath =  getcwd()."/assets/" . $_FILES['upload']['name'][$i];
 
-                    //Upload the file into the temp dir
-                    if(move_uploaded_file($tmpFilePath, $newFilePath)) {
-
-                    }
+                    move_uploaded_file($tmpFilePath, $newFilePath);
                 }
             }
-
 
             $this->prod->insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes);
 
             redirect("admin/productos");
-
 
         }
 
