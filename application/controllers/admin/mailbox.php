@@ -42,7 +42,7 @@ class Mailbox extends CI_Controller {
             $data['email'] = $emails;
 
             /* for every email... */
-            foreach($emails as $email_number) {
+            foreach($emails as $email_number) { 
 
                 // get information specific to this email
                 $overview = imap_fetch_overview($inbox,$email_number,0);
