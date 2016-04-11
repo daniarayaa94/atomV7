@@ -76,7 +76,7 @@ body { font-family: 'Titillium Web', sans-serif; }
 
 .mainmenu-area {background: none repeat scroll 0 0 #30BB39;
 font-family: "Roboto Condensed",sans-serif;
-text-transform: uppercase;
+/*text-transform: uppercase;*/
 width: 100%;
 z-index: 999;}
 
@@ -584,7 +584,7 @@ width: 10px;
     color: #30BB39;
     font-size: 25px;
     margin-bottom: 30px;
-    text-transform: uppercase;
+   /* text-transform: uppercase;*/
 }
 .single-sidebar {
     margin-bottom: 50px;
@@ -1025,4 +1025,67 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 }
 .active img{
     border:2px solid #333 !important;
+}
+
+.fa-times:hover, .fa-trash:hover{
+    cursor: pointer;
+    color: red;;
+}
+
+/*shopping-cart*/
+.shopping-cart{
+    position: fixed;
+    margin-bottom: 0;
+    margin-top: 0;
+    right: -400px;
+    width: 400px;
+    height: 75%;
+    z-index: 999;
+    background: white;
+    padding-left: 10px;
+    padding-right: 15px;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.shopping-cart .header{
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.cart-title:first-letter{
+    Color:#00CC00;
+}
+
+.cart-title{
+    color: #000000;
+    font-weight: bold;
+    font-size: x-large;
+    text-align:match-parent;
+    border-bottom: 1px solid green;
+    padding-bottom: 10px;
+}
+
+#shopping-cart-content .row{
+    padding-bottom: 5px;
+}
+
+#shopping-cart-content .row img{
+    height: 55px;
+    width: 55px;
+}
+
+#shopping-cart-content input[type=submit]{
+    bottom: 0;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+#shopping-cart-content input[type="text"]{
+    width: 70px;
+}
+
+#shopping-cart-content{
+    max-height: 200px;
 }

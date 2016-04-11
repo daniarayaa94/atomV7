@@ -14,7 +14,7 @@ class Enviroment extends CI_Model {
 
         $result = $this->db->get();
 
-        return ( $result->num_rows() > 0 ) ? $result->row()->valor : false;
+        return ( $result->num_rows() > 0 ) ? $result->row()->valor : $key;
 
     }
 

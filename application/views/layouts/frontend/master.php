@@ -39,16 +39,27 @@
 <div class="site-branding-area">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <div class="logo">
-                    <h1><b></b><a href="<?php echo base_url() . 'frontend/'; ?>">A<span><b>Tom</b></span></a></h1>
+                    <h1><a href="<?php echo base_url() . 'frontend/'; ?>"
+                           style="color: #30BB39; font-weight: bold">a<span style="color: #000000"><b>tom</b></span></a>
+                    </h1>
+                </div>
+            </div>
+            <div class="col-sm-6" style="margin-top: 45px;">
+                <div class="input-group">
+                    <input id="search" type="text" class="form-control" placeholder="¿Podemos ayudarlo..?"/>
+                      <span class="input-group-btn">
+                        <button id="btn-filter" class="btn btn-success" type="button"><i class="fa fa-search"></i> IR!
+                        </button>
+                      </span>
                 </div>
             </div>
 
-            <div class="col-sm-6">
-                <div class="shopping-item">
-                    <a href="">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span
-                            class="product-count">5</span></a>
+            <div class="col-sm-3">
+                <div class="shopping-item" id="cart">
+                    <a>Ver Carrito <i class="fa fa-shopping-cart"></i> <span
+                            class="product-count"><?= $cart_qty; ?></span></a>
                 </div>
             </div>
         </div>
@@ -68,10 +79,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="<?php echo base_url() . 'frontend/'; ?>"><?php echo $titulo; ?></a></li>
+                    <li><a href="<?php echo base_url() . 'frontend/'; ?>"><?php echo strtolower($titulo); ?></a></li>
                     <?php foreach ($categorias as $category) { ?>
                         <li>
-                            <a href="<?php echo $url . $category['idCategoria']; ?>"><?php echo $category['nombre']; ?></a>
+                            <a href="<?php echo $url . $category['idCategoria']; ?>"><?php echo ucfirst(strtolower($category['nombre'])); ?></a>
                         </li>
                     <?php } ?>
                 </ul>
@@ -80,7 +91,48 @@
     </div>
 </div> <!-- End mainmenu area -->
 
-<?php echo $content_for_layout; ?>
+<div class="shopping-cart toggle-cart">
+    <div class="cart-title">Carro de cotización</div>
+    <div class="row">
+        <div class="col-sm-3 header">Imagen</div>
+        <div class="col-sm-3 header">Producto</div>
+        <div class="col-sm-3 header">Cantidad</div>
+        <div class="col-sm-3 header">Eliminar</div>
+    </div>
+    <?php if (count($carrito) > 0){ ?>
+    <form action="" method="POST">
+        <div id="shopping-cart-content" >
+            <?php foreach ($carrito as $key => $item) { ?>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="<?= $item['imagen'] ?>" alt="cart-image" class="img-circle"/>
+                    </div>
+                    <div class="col-sm-3"><?= $item['nombre'] ?></div>
+                    <div class="col-sm-3">
+                        <input type="text" value="<?= $item['cantidad'] ?>" name="<?= $item['rowid']; ?>" id="qty-box" />
+                    </div>
+                    <div class="col-sm-3" id="del-item[]" title="<?= $item['rowid']; ?>"><i class="fa fa-trash"></i> </div>
+                </div>
+            <?php } ?>
+            <div>
+                <p>*Esta es información de resumen de los productos agregados al carro de cotización.
+                Pinchando Aceptar podrá ver el carro en pantalla completa y editarlo con más comodidad.</p>
+                <input type="submit" value="Aceptar" class=""/>
+            </div>
+        </div>
+    </form>
+    <?php } else{ ?>
+        <div id="div-empty-cart">
+            <img src="<?= $img_empty_cart;?>" alt="carrito_vacio" style="width: 300px;height: 200px">
+            <p>Su carro de cotización se encuentra vacío. Ponga el mouse sobre la imagen y luego precione
+            Agregar para añadir al carrito. Muchas Gracias.</p>
+        </div>
+    <?php } ?>
+</div>
+
+<div>
+    <?php echo $content_for_layout; ?>
+</div>
 
 <div class="footer-top-area">
     <div class="zigzag-bottom"></div>
@@ -88,12 +140,13 @@
         <div class="row">
             <div class="col-md-4 col-sm-6">
                 <div class="footer-about-us">
-                    <h2>A<span><b>TOM</b></b></span></h2>
+                    <h2 style="color: white;">atom</h2>
                     <p>
-                        Los clintes son nuestra inspiracion y sus satisfaccion nuestra meta.
-                        Buscamos entregar productos de calidad a precios convenientes y en el menor tiempo posibles,
-                        entendemos que si pide algo es porque lo necesitas y por ella, aseguramos que en 24hr tendrá
-                        sus productos en sus manos.
+                        Los clientes son nuestra inspiracion y su satisfaccion nuestra meta.
+                        Buscamos entregar los mejores productos de calidad a precios convenientes y en el menor tiempo
+                        posible,
+                        entendemos que si cotiza productos con nosotros es porque lo necesita urgente, por ende,
+                        le aseguramos que en menos de 24hr tendrá los productos en sus manos.
                     </p>
                     <div class="footer-social">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -146,10 +199,72 @@
     </div>
 </div> <!-- End footer bottom area -->
 
-
 <script type="application/javascript">
-    
+    //carro de ventas
+    $(".add-to-cart-link").on('click', function (event) {
+        var id = $(this).attr('id');
+        var name = $(this).attr('name');
+        var src = $(this).parent().parent().children().attr('src');
+        $.ajax({
+            url: "<?= base_url() . 'frontend/cart/agregar' ?>",
+            type: 'POST',
+            context: document.body,
+            data: {id: id, name: name, imagen: src}
+        }).done(function (params) {
+            location.reload();
+        });
+    });
+    //Buscar productos
+    $('#btn-filter').on('click', function () {
+        var text = $('#search').val();
+        if (text) {
+            location = "<?= $url_filter; ?>" + "/name_prod/" + text;
+        }
+    });
+
+    $("input[id*='qty-box']").focusout(function () {
+        var rowid = $(this).attr('name');
+        var qty   = $(this).val();
+        $.ajax({
+            url: "<?= base_url() . 'frontend/cart/actualizar' ?>",
+            type: 'POST',
+            context: document.body,
+            data: {rowid: rowid, qty: qty}
+        }).done(function (params) {
+            location.reload();
+        });
+    });
+
+    $("div[id*='del-item']").on('click',function () {
+        var rowid = $(this).attr('title');
+        $.ajax({
+            url: "<?= base_url() . 'frontend/cart/eliminar' ?>",
+            type: 'POST',
+            context: document.body,
+            data: {rowid: rowid}
+        }).done(function (params) {
+            location.reload();
+        });
+    });
+
+
+    var hide = true;
+    $('#cart').on('click',function(){
+        if (hide) {
+            $('.shopping-cart').animate({
+                'marginRight' : "+=400px"
+            }, 1000);
+            hide = false;
+        } else {
+            $('.shopping-cart').animate({
+                'marginRight' : "-=400px"
+            }, 1000);
+            hide = true;
+        }
+    });
+
 </script>
+
 <!-- Latest jQuery form server -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
 <!-- Bootstrap JS form CDN -->
@@ -163,4 +278,6 @@
 <script src="<?php echo base_url(); ?>public/frontend/js/main.js"></script>
 </body>
 </html>
+
+
 
