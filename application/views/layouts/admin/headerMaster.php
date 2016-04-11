@@ -126,9 +126,12 @@
     <?php echo $content_for_layout; ?>
 
     <footer class="main-footer">
-
-        <strong>Copyright &copy; 2014-2015 BlackRobot.</strong> All rights reserved.
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.3.0
+        </div>
+        <strong>Copyright &copy; 2016-2016 <a href="">Blackrobot</a>.</strong> Todos los derechos Reservados.
     </footer>
+
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

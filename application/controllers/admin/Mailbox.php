@@ -14,10 +14,18 @@ class Mailbox extends CI_Controller {
 
         $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
 
+        $this->load->model('admin/mailbox/mailbox_model','mailbox',TRUE);
+
         $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
 
-        //$this->layout->view('index',$data);
+        $data['email'] = $this->mailbox->getMails();
 
+        $data['content_for_layout'] = $this->load->view('admin/mailbox/index', $data, TRUE);
+
+        $this->load->view('layouts/admin/headerMaster',$data);
+    }
+
+    public function refresh(){
         // Inicio de Inbox (Recuperacion de correos)
 
         $hostname = '{pop.gmail.com:995/pop3/ssl}';
@@ -39,40 +47,46 @@ class Mailbox extends CI_Controller {
             /* put the newest emails on top */
             rsort($emails);
 
-            $data['email'] = $emails;
+            $this->load->model('admin/mailbox/mailbox_model','mailbox',TRUE);
 
-            /* for every email... */
-            foreach($emails as $email_number) { 
+            foreach($emails as $email_number) {
 
                 // get information specific to this email
                 $overview = imap_fetch_overview($inbox,$email_number,0);
+
+
                 $message = imap_fetchbody($inbox,$email_number,2);
 
-                // output the email header information
-                $output.= '<div  '.($overview[0]->seen ? 'read' : 'unread').'">';
-                $output.= '<span class="subject">'.$overview[0]->subject.'</span> ';
-                $output.= '<span class="from">'.$overview[0]->from.'</span>';
-                $output.= '<span class="date">on '.$overview[0]->date.'</span>';
-                $output.= '</div>';
+                $this->mailbox->insertMails($overview[0]->subject,$overview[0]->from,$message,$overview[0]->date,$overview[0]->uid);
+
+                /* output the email header information
+                $output.= '<tr id="'.$overview[0]->message_id .'" class="'.($overview[0]->seen ? 'read' : 'unread').'">';
+                $output.= '<td class="mailbox-name">'.$overview[0]->from.'</td>';
+                $output.= '<td class="mailbox-subject">'.$overview[0]->subject.'</td> ';
+                $output.= '<td class="mailbox-date">'.date("d-m-Y", strtotime($overview[0]->date)).'</td>';
+                $output.= '</tr>';*/
+                
+                /*
+                 <tr>
+                     <td class="mailbox-name"><a href="read-mail.html"><?php $overview[0]->from ?></a></td>
+                     <td class="mailbox-subject"><?php $overview[0]->subject ?></td>
+                     <td class="mailbox-date"><?php $overview[0]->date ?></td>
+                </tr>
+
+                 */
 
                 //output the email body
-                $output.= '<div class="body">'.$message.'</div>';
+                //$output.= '<div class="body">'.$message.'</div>';
 
 
             }
-
-            echo $output;
         }
 
-        /* close the connection */
         imap_close($inbox);
 
+        $this->index();
+
         // fin de recuperacion
-
-
-        $data['content_for_layout'] = $this->load->view('admin/mailbox/index', $data, TRUE);
-
-        $this->load->view('layouts/admin/headerMaster',$data);
     }
 
 }

@@ -16,6 +16,7 @@
 
             <div>
                 <a href="compose.html" class="btn btn-primary btn-block margin-bottom" style="width: 150px">Compose</a>
+                <a href="mailbox/refresh" class="btn btn-primary btn-block margin-bottom" style="width: 150px">refrescar</a>
             </div><!-- /.col -->
             <div>
                 <div class="box box-primary">
@@ -28,13 +29,18 @@
                         <div class="table-responsive mailbox-messages">
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                <tr>
-                                    
-                                    <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                    <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...</td>
-                                    <td class="mailbox-attachment"></td>
-                                    <td class="mailbox-date">5 mins ago</td>
-                                </tr>
+
+                                <?php foreach ($email as $row){ ?>
+                                    <tr>
+                                        <td><?php echo $row['remitente'] ?></td>
+                                        <td><?php echo $row['asunto'] ?></td>
+                                        <td><?php echo $row['fecha'] ?></td>
+                                    </tr>
+
+                                <?php }?>
+
+
+                                <!-- <?php //echo $email; ?>-->
 
                                 </tbody>
                             </table><!-- /.table -->

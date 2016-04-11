@@ -29,7 +29,7 @@ class Login extends CI_Controller {
 
             $username = $this->input->post('email');
             $password = $this->input->post('password');
-
+  
             $this->load->model('admin/login/login_model','login',TRUE);
 
             $usuario = $this->login->login($username,$password);
@@ -46,6 +46,7 @@ class Login extends CI_Controller {
             } else {
                 redirect('admin');
             }
+
         } else {
             $this->index();
         }

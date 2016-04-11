@@ -5,7 +5,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Iniciar sesion</p>
 
-        <form action="login/iniciar_sesion_post" method="post">
+        <form action="admin/login/iniciar_sesion_post" method="post">
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" placeholder="Email" name="email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
