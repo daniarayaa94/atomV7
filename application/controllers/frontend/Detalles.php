@@ -14,9 +14,26 @@ class Detalles extends CI_Controller {
         $this->load->model('frontend/producto/producto');
 
         //master params
-        $data['titulo']           = $this->enviroment->get_setting('shop_name');
-        $data['categorias']       = $this->categorias->listar();
-        $data['url']              = base_url()."/frontend/clasificacion/index/";
+        $data['titulo'] = $this->enviroment->get_setting('shop_name');
+
+        $data['categorias']     = $this->categorias->listar();
+        $data['url']            = base_url()."frontend/clasificacion/index/categoria/";
+        $data['search_action']  = base_url().'frontend/todos/index/';
+        $data['img_empty_cart'] = base_url().'assets/empty-shop.png';
+        $data['cart_qty']       = $this->cart->total_items();
+
+        $data['url_filter']    = base_url().'frontend/todos/index/';
+        $data['url_registro']  = base_url().'frontend/registro/index/';
+
+        //cargar items en carro de compras
+        $data['carrito']       = array();
+
+        foreach ($this->cart->contents() as $rowid => $producto){
+            $data['carrito'][] = array( 'imagen'   => $producto['img'],
+                'nombre'   => $producto['name'],
+                'cantidad' => $producto['qty'],
+                'rowid'    => $producto['rowid']);
+        }
 
         //child view
         $prod_information         = $this->producto->get_by_id($producto);

@@ -1032,6 +1032,16 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     color: red;;
 }
 
+.login{
+    color: #666;
+}
+
+.login:hover{
+    color: white;
+    text-decoration: none;
+}
+
+
 /*shopping-cart*/
 .shopping-cart{
     position: fixed;

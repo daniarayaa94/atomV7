@@ -1,17 +1,18 @@
 <?php
 
-class Index extends CI_Controller {
+class Registro extends CI_Controller {
 
-	public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
     }
-    
-	public function index()
-	{
+
+    public function index() {
+
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
+        $this->load->model('frontend/producto/producto');
 
+        //master params
         $data['titulo'] = $this->enviroment->get_setting('shop_name');
 
         $data['categorias']     = $this->categorias->listar();
@@ -28,13 +29,16 @@ class Index extends CI_Controller {
 
         foreach ($this->cart->contents() as $rowid => $producto){
             $data['carrito'][] = array( 'imagen'   => $producto['img'],
-                                        'nombre'   => $producto['name'],
-                                        'cantidad' => $producto['qty'],
-                                        'rowid'    => $producto['rowid']);
+                'nombre'   => $producto['name'],
+                'cantidad' => $producto['qty'],
+                'rowid'    => $producto['rowid']);
         }
 
-        $data['content_for_layout'] = $this->load->view('frontend/index', $data, TRUE);
+        //child view
+
+
+        $data['content_for_layout'] = $this->load->view('frontend/registro', $data, TRUE);
         $this->load->view('layouts/frontend/master',$data);
-	}
-    
+    }
+
 }

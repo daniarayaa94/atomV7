@@ -16,8 +16,9 @@ class Clasificacion extends CI_Controller {
         $data['titulo']           = $this->enviroment->get_setting('shop_name');
         $data['categorias']       = $this->categorias->listar();
         $data['url']              = base_url()."frontend/clasificacion/index/categoria/";
-        $data['img_empty_cart']= base_url().'assets/empty-shop.png';
-        $data['cart_qty']       = $this->cart->total_items();
+        $data['img_empty_cart']   = base_url().'assets/empty-shop.png';
+        $data['cart_qty']         = $this->cart->total_items();
+        $data['url_registro']     = base_url().'frontend/registro/index/';
 
         //cargar items en carro de compras
         $data['carrito']       = array();

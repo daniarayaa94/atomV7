@@ -46,7 +46,7 @@
                     </h1>
                 </div>
             </div>
-            <div class="col-sm-6" style="margin-top: 45px;">
+            <div class="col-sm-5" style="margin-top: 45px;">
                 <div class="input-group">
                     <input id="search" type="text" class="form-control" placeholder="¿Podemos ayudarlo..?"/>
                       <span class="input-group-btn">
@@ -56,11 +56,20 @@
                 </div>
             </div>
 
-            <div class="col-sm-3">
-                <div class="shopping-item" id="cart">
-                    <a>Ver Carrito <i class="fa fa-shopping-cart"></i> <span
-                            class="product-count"><?= $cart_qty; ?></span></a>
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="shopping-item" id="cart">
+                            <a>Ver Carrito <i class="fa fa-shopping-cart"></i> <span
+                                    class="product-count"><?= $cart_qty; ?></span></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 shopping-item" style="margin-left: 0;">
+                        <a href="<?= $url_registro; ?>" class="login" >Login <i class="fa fa-key"></i></a>
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -99,33 +108,35 @@
         <div class="col-sm-3 header">Cantidad</div>
         <div class="col-sm-3 header">Eliminar</div>
     </div>
-    <?php if (count($carrito) > 0){ ?>
-    <form action="" method="POST">
-        <div id="shopping-cart-content" >
-            <?php foreach ($carrito as $key => $item) { ?>
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="<?= $item['imagen'] ?>" alt="cart-image" class="img-circle"/>
+    <?php if (count($carrito) > 0) { ?>
+        <form action="" method="POST">
+            <div id="shopping-cart-content">
+                <?php foreach ($carrito as $key => $item) { ?>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img src="<?= $item['imagen'] ?>" alt="cart-image" class="img-circle"/>
+                        </div>
+                        <div class="col-sm-3"><?= $item['nombre'] ?></div>
+                        <div class="col-sm-3">
+                            <input type="text" value="<?= $item['cantidad'] ?>" name="<?= $item['rowid']; ?>"
+                                   id="qty-box"/>
+                        </div>
+                        <div class="col-sm-3" id="del-item[]" title="<?= $item['rowid']; ?>"><i class="fa fa-trash"></i>
+                        </div>
                     </div>
-                    <div class="col-sm-3"><?= $item['nombre'] ?></div>
-                    <div class="col-sm-3">
-                        <input type="text" value="<?= $item['cantidad'] ?>" name="<?= $item['rowid']; ?>" id="qty-box" />
-                    </div>
-                    <div class="col-sm-3" id="del-item[]" title="<?= $item['rowid']; ?>"><i class="fa fa-trash"></i> </div>
+                <?php } ?>
+                <div>
+                    <p>*Esta es información de resumen de los productos agregados al carro de cotización.
+                        Pinchando Aceptar podrá ver el carro en pantalla completa y editarlo con más comodidad.</p>
+                    <input type="submit" value="Aceptar" class=""/>
                 </div>
-            <?php } ?>
-            <div>
-                <p>*Esta es información de resumen de los productos agregados al carro de cotización.
-                Pinchando Aceptar podrá ver el carro en pantalla completa y editarlo con más comodidad.</p>
-                <input type="submit" value="Aceptar" class=""/>
             </div>
-        </div>
-    </form>
-    <?php } else{ ?>
+        </form>
+    <?php } else { ?>
         <div id="div-empty-cart">
-            <img src="<?= $img_empty_cart;?>" alt="carrito_vacio" style="width: 300px;height: 200px">
+            <img src="<?= $img_empty_cart; ?>" alt="carrito_vacio" style="width: 300px;height: 200px">
             <p>Su carro de cotización se encuentra vacío. Ponga el mouse sobre la imagen y luego precione
-            Agregar para añadir al carrito. Muchas Gracias.</p>
+                Agregar para añadir al carrito. Muchas Gracias.</p>
         </div>
     <?php } ?>
 </div>
@@ -200,7 +211,8 @@
 </div> <!-- End footer bottom area -->
 
 <script type="application/javascript">
-    //carro de ventas
+    //agregar al carro de cotzaciones
+
     $(".add-to-cart-link").on('click', function (event) {
         var id = $(this).attr('id');
         var name = $(this).attr('name');
@@ -222,9 +234,10 @@
         }
     });
 
+    <!--Actualizar cantidad de product especifico-->
     $("input[id*='qty-box']").focusout(function () {
         var rowid = $(this).attr('name');
-        var qty   = $(this).val();
+        var qty = $(this).val();
         $.ajax({
             url: "<?= base_url() . 'frontend/cart/actualizar' ?>",
             type: 'POST',
@@ -235,7 +248,8 @@
         });
     });
 
-    $("div[id*='del-item']").on('click',function () {
+    <!--Eliminar del carro-->
+    $("div[id*='del-item']").on('click', function () {
         var rowid = $(this).attr('title');
         $.ajax({
             url: "<?= base_url() . 'frontend/cart/eliminar' ?>",
@@ -248,21 +262,21 @@
     });
 
 
+    <!--Animacion del carrito-->
     var hide = true;
-    $('#cart').on('click',function(){
+    $('#cart').on('click', function () {
         if (hide) {
             $('.shopping-cart').animate({
-                'marginRight' : "+=400px"
+                'marginRight': "+=400px"
             }, 1000);
             hide = false;
         } else {
             $('.shopping-cart').animate({
-                'marginRight' : "-=400px"
+                'marginRight': "-=400px"
             }, 1000);
             hide = true;
         }
     });
-
 </script>
 
 <!-- Latest jQuery form server -->
