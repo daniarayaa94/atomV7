@@ -1099,3 +1099,8 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 #shopping-cart-content{
     max-height: 200px;
 }
+
+.green{
+    color: #00e765;
+    font-weight: bold;
+}

@@ -230,7 +230,7 @@
     $('#btn-filter').on('click', function () {
         var text = $('#search').val();
         if (text) {
-            location = "<?= $url_filter; ?>" + "/name_prod/" + text;
+            location = "<?= $url_filter; ?>" + "/name_prod/" + encodeURI(text);
         }
     });
 

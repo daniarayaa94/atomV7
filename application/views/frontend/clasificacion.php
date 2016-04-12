@@ -68,6 +68,9 @@
                 <h2>Estamos agregando productos a esta categoría.</h2>
             </div>
         <?php } ?>
+        <div class="col-sm-12" style="padding-right: 150px;">
+            <div id="pagination" class="pull-right"> <?php echo $paginacion; ?> </div>
+        </div>
         <hr/>
     </div>
 </div>

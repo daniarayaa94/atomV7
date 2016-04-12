@@ -33,6 +33,9 @@ class Index extends CI_Controller {
                                         'rowid'    => $producto['rowid']);
         }
 
+        //child view
+        $data['mostrar_todos'] = base_url().'frontend/todos/';
+
         $data['content_for_layout'] = $this->load->view('frontend/index', $data, TRUE);
         $this->load->view('layouts/frontend/master',$data);
 	}

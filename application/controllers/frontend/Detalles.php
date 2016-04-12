@@ -7,7 +7,7 @@ class Detalles extends CI_Controller {
         parent::__construct();
     }
 
-    public function index($producto)
+    public function index($id)
     {
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
@@ -36,7 +36,7 @@ class Detalles extends CI_Controller {
         }
 
         //child view
-        $prod_information         = $this->producto->get_by_id($producto);
+        $prod_information         = $this->producto->get_by_id($id);
         $data['producto']         = $prod_information[0];
         $data['imagenes']         = explode(';',$prod_information[0]->imagenes);
         $data['assets']           = base_url().'assets/';

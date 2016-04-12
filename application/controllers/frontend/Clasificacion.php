@@ -5,12 +5,14 @@ class Clasificacion extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('pagination');
     }
 
     public function index()
     {
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
+        $this->load->model('frontend/producto/producto');
 
         //master params
         $data['titulo']           = $this->enviroment->get_setting('shop_name');
@@ -33,6 +35,7 @@ class Clasificacion extends CI_Controller {
         //recibir parametros desde url con nombre
         $uri_params = $this->uri->uri_to_assoc(4);
         $categoria = $uri_params['categoria'];
+
 
         //child view
         $category_info            = $this->categorias->listar($categoria);
@@ -58,8 +61,8 @@ class Clasificacion extends CI_Controller {
                 $filters['shortname'] = $param;
                 $tags[] = $param;
             }elseif ($key == 'name_prod'){
-                $filters['name_prod'] = $param;
-                $tags[] = $param;
+                $filters['name_prod'] = strtolower(urldecode($param));
+                $tags[] = urldecode($param);
                 $data['url_filter'].='/name_prod/'.$param;
             }
         }
@@ -79,8 +82,21 @@ class Clasificacion extends CI_Controller {
 
         $data['tags'] = $tags;
 
+        /* Paginacion */
+        $filters['start'] = isset($uri_params['page'] )? ($uri_params['page'] - 1) : 0;
+        $filters['limit'] = $this->enviroment->get_setting('item_por_pagina');
 
-        $data['productos']        = $this->categorias->get_all_prods($categoria, $filters);
+        $opciones = array();
+        $opciones['per_page'] = $filters['limit'];
+        $opciones['base_url'] = base_url()."frontend/clasificacion/index/categoria/".$categoria;
+        $opciones['total_rows'] = $this->producto->count_productos($filters);
+        $opciones['uri_segment'] = isset($uri_params['page']) ? (array_search('page',$this->uri->segments) + 1) : $this->uri->total_segments() ;
+
+        $this->pagination->initialize($opciones);
+        $data['paginacion'] = $this->pagination->create_links();
+
+
+        $data['productos']        = $this->producto->get_all_prods($filters);
         $data['subcategories']    = $this->categorias->get_sub_categories($categoria, $filters);
 
 
