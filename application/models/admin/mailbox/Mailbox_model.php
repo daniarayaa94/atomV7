@@ -14,6 +14,14 @@ class Mailbox_model extends CI_Model {
 
     }
 
+    function getMailById($id){
+
+        $query = $this->db->get_where('inbox', array('idMail' => $id));
+
+        return $query->result_array();
+
+    }
+
     function insertMails($asunto,$remitente,$mensaje,$fecha,$uId)
     {
 

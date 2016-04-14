@@ -23,7 +23,7 @@
                         <!-- /. tools -->
                     </div>
                     <!--fin header-->
-                    <form method="post" action="guardar" class="form-horizontal">
+                    <form method="post" action="<?php echo base_url();?>admin/categorias/guardar" class="form-horizontal">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="inputNombre" class="col-sm-2 control-label">Nombre</label>
