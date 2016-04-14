@@ -33,6 +33,17 @@ class Todos extends CI_Controller
                 'rowid'    => $producto['rowid']);
         }
 
+        //mostrar usuario y sesion iniciada
+        if (!empty($this->session->userdata('usuario'))){
+            $this->load->model("frontend/notificacion/Notificacion");
+
+            $data['usuario']  = $this->session->userdata('usuario');
+            $data['assets']   = base_url().'assets/';
+            $data['total_notif'] = $this->Notificacion->count_not_read($data['usuario']->idUsuario);
+
+            $data['logout']   = base_url().'frontend/Registro/logout';
+        }
+
         //recibir parametros desde url con nombre
         $uri_params = $this->uri->uri_to_assoc(4);
         $categoria  = isset($uri_params['categoria']) ? $uri_params['categoria'] : null;

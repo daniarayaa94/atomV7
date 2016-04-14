@@ -20,4 +20,12 @@ class Usuario extends CI_Model {
         return (object)$result;
 
     }
+
+    function login($user, $pass){
+        $query = $this->db->get_where('usuario', array('username'=>$user,"password = md5($pass)") );
+        $result['status'] = ( $query->num_rows() == 1);
+        $result['data']   = $query->row();
+
+        return $result;
+    }
 }

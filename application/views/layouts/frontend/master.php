@@ -64,12 +64,34 @@
                                     class="product-count"><?= $cart_qty; ?></span></a>
                         </div>
                     </div>
-                    <div class="col-md-4 shopping-item" style="margin-left: 0;">
-                        <a href="<?= $url_registro; ?>" class="login" >Login <i class="fa fa-key"></i></a>
-                    </div>
+                    <?php if (!empty($usuario)) { ?>
+                        <div class="dropdown col-sm-4 profile">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <img
+                                    src="<?= $assets . (!empty($usuario->fotoPerfil) ? $usuario->fotoPerfil : 'prof.png'); ?>"
+                                    alt=""
+                                    style="height: 35px; width: 35px;"
+                                    />
+                                <?= $usuario->username; ?>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Editar perfil</a></li>
+                                <li><a href="#">Mis cotizaciones</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="<?= $logout; ?>">Salir</a></li>
+                            </ul>
+                            <?php if (!empty($total_notif)){ ?>
+                                <span class="product-count" style="right: 5px;"><?= $total_notif; ?></span>
+                            <?php } ?>
+                        </div>
+                    <?php } else { ?>
+                        <div class="col-md-4 shopping-item" style="margin-left: 0;">
+                            <a href="<?= $url_registro; ?>" class="login">Login <i class="fa fa-key"></i></a>
+                        </div>
+                    <?php } ?>
                 </div>
-
-
             </div>
         </div>
     </div>

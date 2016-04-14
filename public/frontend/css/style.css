@@ -1104,3 +1104,11 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     color: #00e765;
     font-weight: bold;
 }
+
+.profile{
+    float: right;
+    font-size: 18px;
+    margin-top: 40px;
+    position: relative;
+    border-radius: 0 ;
+}

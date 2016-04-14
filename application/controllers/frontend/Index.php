@@ -36,6 +36,17 @@ class Index extends CI_Controller {
         //child view
         $data['mostrar_todos'] = base_url().'frontend/todos/';
 
+        //mostrar usuario y sesion iniciada
+        if (!empty($this->session->userdata('usuario'))){
+            $this->load->model("frontend/notificacion/Notificacion");
+
+            $data['usuario']  = $this->session->userdata('usuario');
+            $data['assets']   = base_url().'assets/';
+            $data['total_notif'] = $this->Notificacion->count_not_read($data['usuario']->idUsuario);
+
+            $data['logout']   = base_url().'frontend/Registro/logout';
+        }
+
         $data['content_for_layout'] = $this->load->view('frontend/index', $data, TRUE);
         $this->load->view('layouts/frontend/master',$data);
 	}

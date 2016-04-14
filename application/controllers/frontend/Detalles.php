@@ -35,6 +35,17 @@ class Detalles extends CI_Controller {
                 'rowid'    => $producto['rowid']);
         }
 
+        //mostrar usuario y sesion iniciada
+        if (!empty($this->session->userdata('usuario'))){
+            $this->load->model("frontend/notificacion/Notificacion");
+
+            $data['usuario']  = $this->session->userdata('usuario');
+            $data['assets']   = base_url().'assets/';
+            $data['total_notif'] = $this->Notificacion->count_not_read($data['usuario']->idUsuario);
+
+            $data['logout']   = base_url().'frontend/Registro/logout';
+        }
+
         //child view
         $prod_information         = $this->producto->get_by_id($id);
         $data['producto']         = $prod_information[0];
