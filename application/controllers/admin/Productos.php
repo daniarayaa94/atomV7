@@ -38,10 +38,10 @@ class Productos extends CI_Controller {
 
     public function agregarProducto()
     {
-        
-        $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
 
         $this->load->model('admin/productos/categorias_model','cate',TRUE);
+        $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
+
         $data['categorias_list'] = $this->cate->getCategorias();
 
 
