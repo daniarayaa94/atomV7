@@ -15,7 +15,7 @@
                     o usted necesite. Si aún o tiene una cuenta, regístrese completanto los datos solicitados en derecha
                     de
                     su pantalla y tendrá acceso a mundo <b>atom &reg;</b>.</p>
-                <form method="POST" action="">
+                <form method="POST" action="<?= $entrar;?>">
                     <div class="form-group">
                         <label for="txt_user">Usuario:</label>
                         <input type="text" name="txt_user" id="txt_user" class="form-control"/>
@@ -34,12 +34,12 @@
                 <legend>Registro de Usuario:</legend>
 
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#persona">Persona</a></li>
-                    <li><a data-toggle="tab" href="#empresa">Empresa</a></li>
+                    <li <?php if($tipo == 'persona'){echo "class='active'";} ?> ><a data-toggle="tab" href="#persona">Persona</a></li>
+                    <li <?php if($tipo == 'empresa'){echo "class='active'";} ?>><a data-toggle="tab" href="#empresa">Empresa</a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div id="persona" class="tab-pane fade in active">
+                    <div id="persona" class="<?= ($tipo == 'persona') ? 'tab-pane fade in active' : 'tab-pane fade' ?>">
                         <h3>Cuenta Personal</h3>
                         <form method="POST" action="<?= $registro_persona; ?>">
                             <div class="form-group col-sm-12">
@@ -58,7 +58,7 @@
                                 <div class="form-group col-sm-6">
                                     <label>Sexo:</label>&nbsp
                                     <div>
-                                        <input type="radio" name="r_sexo" value="M"/>Masculino &nbsp
+                                        <input checked type="radio" name="r_sexo" value="M"/>Masculino &nbsp
                                         <input type="radio" name="r_sexo" value="F"/>Femenino
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                         </form>
                     </div>
 
-                    <div id="empresa" class="tab-pane fade">
+                    <div id="empresa" class="<?= ($tipo == 'empresa') ? 'tab-pane fade in active' : 'tab-pane fade' ?>">
                         <h3>Empresa</h3>
                         <form method="POST" action="<?= $registro_persona; ?>">
                             <div class="form-group col-sm-12">
@@ -107,7 +107,7 @@
                             <div>
                                 <div class="form-group col-sm-6">
                                     <label for="txt_email">R.u.t Empresa: </label>
-                                    <input type="text" name="txt_rutemp" id="txt_rutemp" class="form-control"/>
+                                    <input type="text" name="txt_rut" id="txt_rut" class="form-control"/>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="txt_email">Telefono: </label>
