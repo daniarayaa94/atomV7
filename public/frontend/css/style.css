@@ -1086,7 +1086,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
     width: 55px;
 }
 
-#shopping-cart-content input[type=submit]{
+.submit{
     bottom: 0;
     margin-bottom: 0px;
     width: 100%;

@@ -22,6 +22,7 @@ class Todos extends CI_Controller
         $data['img_empty_cart']   = base_url().'assets/empty-shop.png';
         $data['cart_qty']         = $this->cart->total_items();
         $data['url_registro']     = base_url().'frontend/registro/index/';
+        $data['mostrar_carro']    = base_url().'frontend/cart/mostrar/';
 
         //cargar items en carro de compras
         $data['carrito']       = array();

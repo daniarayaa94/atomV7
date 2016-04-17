@@ -33,6 +33,8 @@ class Index extends CI_Controller {
                                         'rowid'    => $producto['rowid']);
         }
 
+        $data['mostrar_carro'] = base_url().'frontend/cart/mostrar/';
+
         //child view
         $data['mostrar_todos'] = base_url().'frontend/todos/';
 

@@ -24,6 +24,7 @@ class Detalles extends CI_Controller {
 
         $data['url_filter']    = base_url().'frontend/todos/index/';
         $data['url_registro']  = base_url().'frontend/registro/index/';
+        $data['mostrar_carro'] = base_url().'frontend/cart/mostrar/';
 
         //cargar items en carro de compras
         $data['carrito']       = array();

@@ -2,7 +2,7 @@
     <?php echo json_encode($productos_en_carrito); foreach ($productos_en_carrito as $item){ ?>
         <div class="row">
             <div class="col-sm-2">
-                <img src="" class="image">
+                <img src="<?= $item['img']; ?>" class="img-responsive">
             </div>
             <div class="col-sm-4">
                 <h3><?= $item['name']; ?></h3>

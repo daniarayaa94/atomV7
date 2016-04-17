@@ -131,7 +131,7 @@
         <div class="col-sm-3 header">Eliminar</div>
     </div>
     <?php if (count($carrito) > 0) { ?>
-        <form action="" method="POST">
+        <form action="<?php echo  $mostrar_carro; ?>" method="POST">
             <div id="shopping-cart-content">
                 <?php foreach ($carrito as $key => $item) { ?>
                     <div class="row">
@@ -150,7 +150,7 @@
                 <div>
                     <p>*Esta es información de resumen de los productos agregados al carro de cotización.
                         Pinchando Aceptar podrá ver el carro en pantalla completa y editarlo con más comodidad.</p>
-                    <input type="submit" value="Aceptar" class=""/>
+                    <a href="<?= $mostrar_carro; ?>" class="btn btn-success submit">Aceptar</a>
                 </div>
             </div>
         </form>
