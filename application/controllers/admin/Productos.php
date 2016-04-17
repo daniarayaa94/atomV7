@@ -11,32 +11,40 @@ class Productos extends CI_Controller {
 
     public function index()
     {
-
         $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
         $this->load->model('admin/productos/productos_model','prod',TRUE);
+        $this->load->model('admin/productos/categorias_model','cate',TRUE);
 
         $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
+
+        if (sizeof($this->cate->getCategorias()) == 0){
+            $data['hasCategorias'] = false;
+        }else{
+            $data['hasCategorias'] = true;
+        }
+
+        $data['tituloAgregarCategoria'] = 'No poseemos registro de categorias. Primero debes agregar una categoria.';
+
+        $data['tituloAgregar'] = 'Agregar Producto';
 
         $data['productos_list'] = $this->prod->getProductos();
 
         $data['content_for_layout'] = $this->load->view('admin/productos/index', $data, TRUE);
 
         $this->load->view('layouts/admin/headerMaster',$data);
-
-
     }
 
 
 
     public function agregarProducto()
     {
-        
-        $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
 
         $this->load->model('admin/productos/categorias_model','cate',TRUE);
+        $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
 
         $data['categorias_list'] = $this->cate->getCategorias();
-        
+
+
         $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
 
         $data['content_for_layout'] = $this->load->view('admin/productos/agregarProductos', $data, TRUE);
@@ -91,8 +99,18 @@ class Productos extends CI_Controller {
 
     }
 
-    public function upload(){
-        
+    public function editar(){
+        $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
+
+        $this->load->model('admin/productos/categorias_model','cate',TRUE);
+
+        $data['categorias_list'] = $this->cate->getCategorias();
+
+        $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
+
+        $data['content_for_layout'] = $this->load->view('admin/productos/agregarProductos', $data, TRUE);
+
+        $this->load->view('layouts/admin/headerMaster',$data);
     }
 
     

@@ -21,7 +21,7 @@
                         <!-- tools box -->
                         <div class="pull-right box-tools">
 
-                            <a href="categorias/agregarCategoria" class="btn btn-success btn-sm"  data-toggle="tooltip" title="" data-original-title="Agregar Categoria">
+                            <a href="<?php echo base_url();?>admin/categorias/agregarCategoria" class="btn btn-success"  data-toggle="tooltip" title="" data-original-title="Agregar Categoria">
                                 <i class="fa fa-plus"></i></a>
 
                             <!-- <button type="button" class="btn btn-danger btn-sm"  data-toggle="tooltip" title="" data-original-title="Eliminar">
@@ -33,7 +33,8 @@
 
 
                     <div class="box-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -43,17 +44,23 @@
                             </thead>
                             <tbody>
 
-                            <?php foreach ($categorias_list as $row){ ?>
-                                <tr>
-                                    <td><?php echo $row['nombre'] ?></td>
-                                    <td><?php echo $row['descripcion'] ?></td>
-                                </tr>
+                            <?php if (sizeof($categorias_list) == 0){ ?>
+                                <td class="text-center" colspan="4">Sin registros.</td>
+                            <?php }else {
+                                
+                                foreach ($categorias_list as $row){ ?>
+                                    <tr>
+                                        <td><?php echo $row['nombre'] ?></td>
+                                        <td><?php echo $row['descripcion'] ?></td>
+                                    </tr>
 
-                            <?php }?>
+                                <?php }
+                            }?>
 
 
                             </tbody>
                         </table>
+                        </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
 

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<?php echo base_url()?>/public/admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url()?>/public/admin/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>/public/admin/dist/css/AdminLTE.css">
     
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
@@ -40,6 +41,8 @@
 
     <script src="<?php echo base_url()?>/public/admin/dist/js/fileinput.js" type="text/javascript"></script>
     <script src="<?php echo base_url()?>/public/admin/dist/js/fileinput_locale_es.js" type="text/javascript"></script>
+
+    <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 
     <script>
         $('#file-es').fileinput({
@@ -322,11 +325,14 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>/public/admin/dist/js/demo.js"></script>
 
+
+
 <!-- DataTables -->
 <script src="<?php echo base_url()?>public/admin/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url()?>public/admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?php echo base_url()?>public/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+
 
 <!-- page script -->
 <script>

@@ -22,7 +22,7 @@
                         <!-- /. tools -->
                     </div>
                     <!--fin header-->
-                    <form action="guardar" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <form action="<?php echo base_url();?>admin/productos/guardar" method="post" class="form-horizontal" enctype="multipart/form-data">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="inputNombre" class="col-sm-2 control-label">Nombre</label>
