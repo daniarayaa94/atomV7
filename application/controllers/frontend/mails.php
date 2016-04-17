@@ -15,6 +15,7 @@ if (php_sapi_name() != 'cli') {
     throw new Exception('This application must be run on the command line.');
 }
 
+
 /**
  * Returns an authorized API client.
  * @return Google_Client the authorized client object
