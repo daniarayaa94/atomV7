@@ -7,14 +7,52 @@ class Productos_model extends CI_Model {
     }
 
     function getProductos(){
-
-        $query = $this->db->query('SELECT idProducto, nombre, marca, descripcion, stock FROM producto');
+        
+        $query = $this->db->get_where('producto', array('borrado' => 0));
 
         return $query->result_array();
         
     }
 
-    function insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes)
+    function getProductoById($id){
+
+        $query = $this->db->get_where('producto', array('idProducto' => $id));
+
+        return $query->row();
+
+    }
+
+    function getPrecioVentaByIdProducto($id){
+
+        $query = $this->db->get_where('precio', array('idProducto' => $id ,'tipo' => 'venta', 'actual' => 1));
+
+        return $query->row();
+
+    }
+
+    function getPrecioPromocionByIdProducto($id){
+
+        $query = $this->db->get_where('precio', array('idProducto' => $id ,'tipo' => 'venta', 'actual' => 1));
+
+        $precioPromocion = '';
+        
+        if($query->row()->esPromocion == 1 ){
+            $precioPromocion = $this->db->get_where('precio', array('idProducto' => $id ,'tipo' => 'promocion', 'actual' => 1))->row()->valor;
+        }
+
+        return $precioPromocion;
+
+    }
+
+    function getPrecioCompraByIdProducto($id){
+
+        $query = $this->db->get_where('precio', array('idProducto' => $id ,'tipo' => 'compra', 'actual' => 1));
+
+        return $query->row();
+
+    }
+
+    function insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion)
     {
         $this->nombre   = $nombre;
         $this->marca = $marca;
@@ -29,17 +67,70 @@ class Productos_model extends CI_Model {
 
         $id_producto = $this->db->insert_id();
         
-        return $id_producto;
+        $this->insertPrecio($id_producto,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion);
 
+    }
+    
+    function insertPrecio($idProducto,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion){
+
+        $this->idProducto   = $idProducto;
+        
+        if (!$conPromocion){
+            $fechaInicio = date("Y-m-d H:i:s");
+            $fechaFin   = null;
+            $conPromocion = 0;
+        }else{
+            $conPromocion = 1;
+        }
+
+        if ($conIva){
+            $conIva = 1;
+        }else{
+            $conIva = 0;
+        }
+
+        $data = array(
+            'idProducto' =>  $idProducto,
+            'fechaDesde' => $fechaInicio ,
+            'fechaHasta' => $fechaFin,
+            'esPromocion' => $conPromocion,
+            'tipo' => 'venta',
+            'valor' => $precioVenta,
+            'actual' => 1,
+            'conIva' => $conIva
+        );
+
+
+        /********************/
+
+        //Insert Precio Venta
+
+        $this->db->insert('precio', $data);
+
+        /********************/
+
+        //Insert Precio Promocion
+        if($conPromocion == 1){
+            $data['tipo']   = 'promocion';
+            $data['valor']   = $precioPromocion;
+
+            $this->db->insert('precio', $data);
+        }
+
+        /********************/
+
+        //Insert Precio Compra
+
+        $data['tipo']   = 'compra';
+        $data['valor']   = $precioCompra;
+
+        $this->db->insert('precio', $data);
 
     }
 
-    function update_entry()
+    function deleteProducto($id)
     {
-        $this->title   = $_POST['title'];
-        $this->content = $_POST['content'];
-        $this->date    = time();
-
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
+        $this->borrado = 1;
+        $this->db->update('producto', $this, array('idProducto' => $id));
     }
 }

@@ -15,12 +15,12 @@
                 <div class="col-md-2">
                     <div class="box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Folders</h3>
+                            <h3 class="box-title">Buzones</h3>
                         </div>
                         <div class="box-body no-padding" style="display: block;">
                             <ul class="nav nav-pills nav-stacked">
-                                <li  <?php if($this->uri->segment(3) == ''){echo 'class=" active"';}?>><a href="<?php echo base_url();?>admin/mailbox"><i class="fa fa-inbox"></i> Inbox </a></li>
-                                <li <?php if($this->uri->segment(3) == 'enviados'){echo 'class=" active"';}?>><a href="<?php echo base_url();?>admin/mailbox/enviados"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                                <li  <?php if($this->uri->segment(3) == ''){echo 'class=" active"';}?>><a href="<?php echo base_url();?>admin/mailbox"><i class="fa fa-inbox"></i> Recibidos </a></li>
+                                <li <?php if($this->uri->segment(3) == 'enviados'){echo 'class=" active"';}?>><a href="<?php echo base_url();?>admin/mailbox/enviados"><i class="fa fa-envelope-o"></i> Enviados</a></li>
                             </ul>
                         </div>
                         <!-- /.box-body -->
@@ -30,7 +30,7 @@
                 <div class="col-md-10">
                     <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Inbox</h3>
+                        <h3 class="box-title"><?php echo $bandeja;?></h3>
 
                         <div class="box-tools pull-right">
 
@@ -41,29 +41,27 @@
                                 <script>
 
                                     $( "#refresh" ).on( "click", function() {
-                                        $( "#spin" ).addClass( "fa-spin" );
+                                        //$( "#spin" ).addClass( "fa-spin" );
                                     });
 
                                 </script>
                             </div>
 
                             <div class="btn-group">
-                                <a href="<?php echo base_url();?>admin/mailbox/readMail" class="btn btn-primary"  data-toggle="tooltip" title="" data-original-title="Actualizar">
+                                <a href="<?php echo base_url();?>admin/mailbox/envelope" class="btn btn-primary"  data-toggle="tooltip" title="" data-original-title="Nuevo Correo">
                                     <i class="fa fa-envelope"></i></a>
                             </div>
-
-
 
                         </div>
 
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
+                    <div class="box-body ">
 
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>Nombre Remitente</th>
+                                    <th><?php if($this->uri->segment(3) == 'enviados'){echo 'Destinatario';}else{echo 'Remitente';}?></th>
                                     <th>Asunto</th>
                                     <th>Fecha</th>
 
@@ -77,7 +75,7 @@
                                 <?php }else {
                                     foreach ($email as $row){ ?>
                                         <tr >
-                                            <td class="mailbox-name"><a href="mailbox/readMail/<?php echo $row['idMail'] ?>"><?php echo $row['remitente'] ?></a></td>
+                                            <td class="mailbox-name"><a href="<?php echo base_url();?>admin/mailbox/readMail/<?php echo $row['idMail'] ?>"><?php if($this->uri->segment(3) == 'enviados'){echo $row['destinatario'];}else{echo $row['remitente'];}?></a></td>
                                             <td class="mailbox-subject"><?php echo $row['asunto'] ?></td>
                                             <td class="mailbox-date"><?php echo $row['fecha'] ?></td>
                                         </tr>

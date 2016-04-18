@@ -22,14 +22,24 @@
                         <!-- /. tools -->
                     </div>
                     <!--fin header-->
-                    <form action="<?php echo base_url();?>admin/productos/guardar" method="post" class="form-horizontal" enctype="multipart/form-data">
+                    <!--<form action="<?php //echo base_url();?>admin/productos/guardar" method="post" class="form-horizontal" enctype="multipart/form-data">-->
+
+
+
+                    <?php
+                    $attributes = array('class' => 'form-horizontal', 'id' => 'formProductos','enctype' => 'multipart/form-data');
+                    echo form_open(base_url().'admin/productos/agregarProducto',$attributes);
+                    ?>
+
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="inputNombre" class="col-sm-2 control-label">Nombre</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputNombre" id="inputNombre" placeholder="Nombre del producto" required>
+                                    <input type="text" class="form-control" name="inputNombre" value="<?php echo set_value('inputNombre'); ?>" id="inputNombre" placeholder="Nombre del producto">
+                                    <?php echo form_error('inputNombre', '<div class="error">', '</div>'); ?>
                                 </div>
+
 
                             </div>
 
@@ -37,7 +47,8 @@
                                 <label for="inputMarca" class="col-sm-2 control-label">Marca</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputMarca" id="inputMarca" placeholder="Marca" required>
+                                    <input type="text" class="form-control" name="inputMarca" value="<?php echo set_value('inputMarca'); ?>" id="inputMarca" placeholder="Marca">
+                                    <?php echo form_error('inputMarca', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
 
@@ -45,7 +56,8 @@
                                 <label for="inputDescripcion" class="col-sm-2 control-label">Descripcion</label>
 
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" name="inputDescripcion" id="inputDescripcion" placeholder="Descripcion" required></textarea>
+                                    <textarea type="text" class="form-control" name="inputDescripcion" id="inputDescripcion" placeholder="Descripcion"><?php echo set_value('inputDescripcion'); ?></textarea>
+                                    <?php echo form_error('inputDescripcion', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
 
@@ -53,7 +65,8 @@
                                 <label for="inputStock" class="col-sm-2 control-label">Stock</label>
 
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="inputStock" id="inputStock" placeholder="Stock" required>
+                                    <input type="number" class="form-control" name="inputStock" value="<?php echo set_value('inputStock'); ?>" id="inputStock" placeholder="Stock">
+                                    <?php echo form_error('inputStock', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
 
@@ -61,74 +74,10 @@
                                 <label for="inputShortName" class="col-sm-2 control-label">ShortName</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputShortName" id="inputShortName" placeholder="ShortName" required>
+                                    <input type="text" class="form-control" name="inputShortName" id="inputShortName" value="<?php echo set_value('inputShortName'); ?>" placeholder="ShortName">
+                                    <?php echo form_error('inputShortName', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="inputPrecio" class="col-sm-2 control-label">Precio</label>
-
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" name="inputPrecio" id="inputPrecio" placeholder="Precio" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputTipo" class="col-sm-2 control-label">Tipo</label>
-
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputTipo" id="inputTipo" placeholder="Ej: Venta o arriendo" required>
-                                </div>
-                            </div>
-
-
-
-                            <!-- ##############   CHECKBOX PROMOCION   ################-->
-
-
-                            <script>
-                                $(document).ready(function(){
-
-                                    $(".checkbox").change(function() {
-
-                                        if($("#fechas").is(":visible")) {
-                                            $("#fechas").hide();
-                                        }else{
-                                            $("#fechas").show();
-                                        }
-                                    });
-
-                                });
-                            </script>
-
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="inputPromocion"> Promocion
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="fechas" hidden>
-                                <div class="form-group" >
-                                    <label for="inputDesde" class="col-sm-2 control-label">Desde</label>
-
-                                    <div class="col-sm-10">
-                                        <input type="date" class="form-control" name="inputDesde" id="inputDesde">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputHasta" class="col-sm-2 control-label">Hasta</label>
-
-                                    <div class="col-sm-10">
-                                        <input type="date" class="form-control" name="inputHasta" id="inputHasta">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ##############  FIN CHECKBOX PROMOCION   ################-->
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Categoria</label>
@@ -142,6 +91,98 @@
                                     </select>
                                 </div>
                             </div>
+
+
+
+
+                            <div class="form-group">
+                                <label for="inputPrecio" class="col-sm-2 control-label">Precio Costo</label>
+
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control" name="inputPrecioCompra" id="inputPrecioCompra" value="<?php echo set_value('inputPrecioCompra'); ?>" placeholder="Precio Costo">
+                                    <?php echo form_error('inputPrecioCompra', '<div class="error">', '</div>'); ?>
+                                </div>
+
+                                <div class="col-sm-5">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="inputIva" id="inputIva" value="true"> Iva incluido
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPrecio" class="col-sm-2 control-label">Precio Venta</label>
+
+                                <div class="col-sm-5">
+                                    <input type="number" class="form-control" name="inputPrecioVenta" id="inputPrecioVenta" value="<?php echo set_value('inputPrecioVenta'); ?>" placeholder="Precio Venta">
+                                    <?php echo form_error('inputPrecioVenta', '<div class="error">', '</div>'); ?>
+                                </div>
+                            </div>
+
+                            <script>
+
+                                $(document).ready(function(){
+
+                                    $("#inputPromocion").change(function() {
+
+                                        if($("#fechas").is(":visible")) {
+                                            $("#fechas").hide();
+                                        }else{
+                                            $("#fechas").show();
+                                        }
+                                    });
+
+
+                                });
+
+                                $( "#inputPrecioCompra" ).keyup(function() {
+                                    $('#inputPrecioVenta').val(Math.floor(($("#inputPrecioCompra").val() * (100 + <?php echo $ganancia; ?>)) / 100));
+                                });
+
+                            </script>
+
+                            <!-- ##############   CHECKBOX PROMOCION   ################-->
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="inputPromocion" value="true" id="inputPromocion" value="<?php echo set_value('inputPromocion'); ?>"> Promocion
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="fechas" hidden>
+                                <div class="form-group" >
+                                    <label for="inputDesde" class="col-sm-2 control-label">Desde</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" name="inputDesde" value="<?php echo set_value('inputDesde'); ?>" id="inputDesde">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputHasta" class="col-sm-2 control-label">Hasta</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" name="inputHasta" value="<?php echo set_value('inputHasta'); ?>" id="inputHasta">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="inputPrecioPromocion" class="col-sm-2 control-label">Precio Promocion</label>
+
+                                    <div class="col-sm-5">
+                                        <input type="number" class="form-control" name="inputPrecioPromocion" id="inputPrecioPromocion" value="<?php echo set_value('inputPrecioPromocion'); ?>" placeholder="Precio Promocion">
+                                        <?php echo form_error('inputPrecioPromocion', '<div class="error">', '</div>'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ##############  FIN CHECKBOX PROMOCION   ################-->
+
 
                             <div class="form-group">
 
@@ -160,6 +201,7 @@
                             <!-- /.box-footer -->
 
                         </div>
+
                     </form>
 
 
