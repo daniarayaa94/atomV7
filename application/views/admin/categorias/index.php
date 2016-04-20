@@ -56,20 +56,31 @@
                                         <td><?php echo $row['nombre'] ?></td>
                                         <td><?php echo $row['descripcion'] ?></td>
                                         <td class="text-right">
-                                            <a href="<?php echo base_url();?>admin/categorias/delete/<?php echo $row['idCategoria'] ?>" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Eliminar"><i class="fa fa-trash"></i></a>
-                                            <!--<a href="<?php echo base_url();?>admin/productos/editar/<?php echo $row['idCategoria'] ?>" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Editar"><i class="fa fa-pencil"></i></a>-->
+
+                                            <a href="<?php echo base_url();?>admin/categorias/delete/<?php echo $row['idCategoria'] ?>" onclick="return confirm('Está seguro que desea eliminar las categoria seleccionada, si la elimninas tambien se eliminaran los productos relacionador con esta categoria.')" data-toggle="tooltip"  title="" class="btn btn-danger" data-original-title="Eliminar"><i class="fa fa-trash"></i></a>
+                                            <a href="<?php echo base_url();?>admin/categorias/editar/<?php echo $row['idCategoria'] ?>" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Editar"><i class="fa fa-pencil"></i></a>
                                         </td>
                                     </tr>
 
                                 <?php }
                             }?>
 
-
                             </tbody>
                         </table>
                         </div>
                     </div><!-- /.box-body -->
                     </form>
+
+                    <!--<?php echo json_encode($results).$offset;?>
+                    <div id="pagination">
+                        <ul class="tsc_pagination">
+
+
+                            <?php foreach ($links as $link) {
+                                //echo "<li>". $link."</li>";
+                            } ?>
+                    </div>-->
+
                 </div><!-- /.box -->
 
 

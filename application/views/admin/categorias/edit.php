@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Agregar Categorias
+            Editar Categorias
 
         </h1>
 
@@ -25,14 +25,14 @@
                     <!--fin header-->
                     <?php
                     $attributes = array('class' => 'form-horizontal', 'id' => 'formCategorias');
-                    echo form_open(base_url().'admin/categorias/agregarCategoria',$attributes);
+                    echo form_open(base_url().'admin/categorias/editar/'.$idCategorias,$attributes);
                     ?>
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="inputNombre" class="col-sm-2 control-label">Nombre</label>
 
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="inputNombre" id="inputNombre" value="<?php echo set_value('inputNombre',''); ?>" placeholder="Nombre de la categoria" >
+                                    <input type="text" class="form-control" name="inputNombre" id="inputNombre" value="<?php echo set_value('inputNombre',$categoria->nombre); ?>" placeholder="Nombre de la categoria">
                                     <?php echo form_error('inputNombre', '<div class="error">', '</div>'); ?>
                                 </div>
 
@@ -42,21 +42,18 @@
                                 <label for="inputDescripcion" class="col-sm-2 control-label">Descripcion</label>
 
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" id="inputDescripcion" name="inputDescripcion" placeholder="Descripcion" ><?php echo set_value('inputDescripcion',''); ?></textarea>
+                                    <textarea type="text" class="form-control" id="inputDescripcion" name="inputDescripcion" placeholder="Descripcion" ><?php echo set_value('inputDescripcion',$categoria->descripcion); ?></textarea>
                                     <?php echo form_error('inputDescripcion', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
 
-
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            
                             <button type="submit" class="btn btn-info pull-right">Guardar</button>
                         </div>
                         <!-- /.box-footer -->
                     </form>
-
 
                 </div><!-- /.box -->
 

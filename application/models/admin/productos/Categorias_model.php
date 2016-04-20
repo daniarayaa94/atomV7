@@ -14,6 +14,35 @@ class Categorias_model extends CI_Model {
 
     }
 
+    // Fetch data according to per_page limit.
+    public function fetch_data($per_page,$offset) {
+
+        $this->db->limit($per_page,$offset);
+
+        $this->db->where('borrado', 0);
+        $query = $this->db->get("categoria");
+
+        return $query->result_array();
+
+    }
+
+
+    function getCategoriaById($id){
+
+        $query = $this->db->get_where('categoria', array('idCategoria' => $id));
+
+        return $query->row();
+
+    }
+    
+    
+    function updateCategoria($id,$nombre,$descripcion){
+        $this->nombre = $nombre;
+        $this->descripcion    = $descripcion;
+
+        $this->db->update('categoria', $this, array('idCategoria' => $id));
+    }
+
     function insertCategorias($nombre, $descripcion)
     {
         $this->nombre   = $nombre;

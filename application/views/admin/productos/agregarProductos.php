@@ -197,7 +197,6 @@
 
                             <!-- /.box-body -->
                             <div class="box-footer">
-                                <button type="submit" class="btn btn-default">Cancelar</button>
                                 <button type="submit" class="btn btn-info pull-right">Guardar</button>
                             </div>
                             <!-- /.box-footer -->
