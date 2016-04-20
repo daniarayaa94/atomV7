@@ -8,7 +8,7 @@ class Categorias_model extends CI_Model {
 
     function getCategorias(){
 
-        $query = $this->db->query('SELECT idCategoria, nombre, descripcion FROM categoria');
+        $query = $this->db->get_where('categoria', array('borrado' => 0));
 
         return $query->result_array();
 
@@ -20,6 +20,12 @@ class Categorias_model extends CI_Model {
         $this->descripcion = $descripcion;
 
         $this->db->insert('categoria', $this);
+    }
+
+    function deleteCategoria($id)
+    {
+        $this->borrado = 1;
+        $this->db->update('categoria', $this, array('idCategoria' => $id));
     }
 
     function update_entry()

@@ -52,6 +52,17 @@ class Productos extends CI_Controller {
         $this->form_validation->set_rules('inputPrecioCompra', 'Precio Costo', 'required');
         $this->form_validation->set_rules('inputPrecioVenta', 'Precio Venta', 'required');
 
+
+        if ($this->input->post()){
+
+            if ($this->input->post('inputPromocion') == 1){
+                $this->form_validation->set_rules('inputDesde', 'Desde', 'required');
+                $this->form_validation->set_rules('inputHasta', 'Hasta', 'required');
+                $this->form_validation->set_rules('inputPrecioPromocion', 'Precio Promocion', 'required');
+            }
+
+        }
+
         $this->form_validation->set_message('required', '* Debes completar este campo.');
 
         $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
@@ -92,8 +103,69 @@ class Productos extends CI_Controller {
         
     }
     
-    public function guardar(){
+    public function guardarCambiosEdicion($id){
         
+        if ($this->input->post()) {
+
+            $this->load->model('admin/productos/productos_model','prod',TRUE);
+
+            $nombre = $this->input->post('inputNombre');
+            $marca = $this->input->post('inputMarca');
+            $descripcion = $this->input->post('inputDescripcion');
+            $stock = $this->input->post('inputStock');
+            $shortname = $this->input->post('inputShortName');
+            $categoria = $this->input->post('inputCategoria');
+            $precioVenta = $this->input->post('inputPrecioVenta');
+            $precioCompra = $this->input->post('inputPrecioCompra');
+            $precioPromocion = $this->input->post('inputPrecioPromocion');
+
+            $conIva = $this->input->post('inputIva');
+
+            $conPromocion = $this->input->post('inputPromocion');
+
+            if ($conIva){
+                $precioCompra = ($precioCompra * 119) / 100;
+            }
+
+            $fechaInicio = $this->input->post('inputDesde');
+            $fechaFin = $this->input->post('inputHasta');
+
+            $imagenes = '';
+
+            
+
+            if (sizeof($_FILES['upload']['name']) > 0) {
+
+                $imagenes = implode(";", $_FILES['upload']['name']);
+
+                $total = count($_FILES['upload']['name']);
+
+                for ($i = 0; $i < $total; $i++) {
+
+                    $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
+
+                    if ($tmpFilePath != "") {
+                        $newFilePath = getcwd() . "/assets/" . $_FILES['upload']['name'][$i];
+
+                        move_uploaded_file($tmpFilePath, $newFilePath);
+                    }
+                }
+
+            }
+
+            $this->prod->updateProductos($id,$nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion);
+
+            redirect("admin/productos");
+
+        }
+
+
+
+
+    }
+
+    public function guardar(){
+
         if ($this->input->post()) {
 
             $this->load->model('admin/productos/productos_model','prod',TRUE);
@@ -160,8 +232,11 @@ class Productos extends CI_Controller {
         $this->form_validation->set_rules('inputDescripcion', 'Descripcion', 'required');
         $this->form_validation->set_rules('inputStock', 'Stock', 'required');
         $this->form_validation->set_rules('inputShortName', 'ShortName', 'required');
-        $this->form_validation->set_rules('inputPrecioCosto', 'Precio Costo', 'required');
+        $this->form_validation->set_rules('inputPrecioCompra', 'Precio Costo', 'required');
         $this->form_validation->set_rules('inputPrecioVenta', 'Precio Venta', 'required');
+
+
+
 
         $this->form_validation->set_message('required', '* Debes completar este campo.');
         
@@ -175,7 +250,36 @@ class Productos extends CI_Controller {
 
         $data['producto'] = $this->prod->getProductoById($id);
 
-        $data['precioVenta'] = $this->prod->getPrecioVentaByIdProducto($id);
+        $precioVenta = $this->prod->getPrecioVentaByIdProducto($id);
+
+        $producto = $this->prod->getProductoById($id);
+
+        $imagen = '';
+
+        $imagenesArray = explode(';',$producto->imagenes);
+        
+        if ($this->input->post()){
+            $precioVenta->esPromocion = null;
+            $precioVenta->conIva = null;
+
+
+            if ($this->input->post('inputPromocion') == 1){
+                $this->form_validation->set_rules('inputDesde', 'Desde', 'required');
+                $this->form_validation->set_rules('inputHasta', 'Hasta', 'required');
+                $this->form_validation->set_rules('inputPrecioPromocion', 'Precio Promocion', 'required');
+            }
+
+        }
+
+        for ($i = 0; $i < sizeof($imagenesArray); $i++){
+
+            $imagen .= "<div class='file-preview-frame' id='preview-".$imagenesArray[$i]."' data-fileindex='0'><img src='".base_url()."assets/".$imagenesArray[$i]."' class='file-preview-image'><div class='file-thumbnail-footer'><div class='file-footer-caption' title='".$imagenesArray[$i]."'>.$imagenesArray[$i].</div></div></div>";
+
+        }
+
+        $data['imagenes'] = $imagen;
+
+        $data['precioVenta'] = $precioVenta;
 
         $data['precioPromocion'] = $this->prod->getPrecioPromocionByIdProducto($id);
 
@@ -194,7 +298,7 @@ class Productos extends CI_Controller {
             $this->load->view('layouts/admin/headerMaster',$data);
         }else
         {
-
+            $this->guardarCambiosEdicion($id);
         }
     }
 

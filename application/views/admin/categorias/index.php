@@ -24,6 +24,7 @@
                             <a href="<?php echo base_url();?>admin/categorias/agregarCategoria" class="btn btn-success"  data-toggle="tooltip" title="" data-original-title="Agregar Categoria">
                                 <i class="fa fa-plus"></i></a>
 
+                            <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Está seguro que desea eliminar los productos seleccionados') ? $('#form-product').submit() : false;" data-original-title="Borrar producto"><i class="fa fa-trash-o"></i></button>
                             <!-- <button type="button" class="btn btn-danger btn-sm"  data-toggle="tooltip" title="" data-original-title="Eliminar">
                                 <i class="fa fa-trash-o"></i></button> -->
 
@@ -31,15 +32,16 @@
                         <!-- /. tools -->
                     </div>
 
-
-                    <div class="box-body">
+                    <form action="<?php echo base_url();?>admin/categorias/delete" method="post" enctype="multipart/form-data" id="form-product">
+                        <div class="box-body">
                         <div class="table-responsive">
                             <table class="table table-bordered">
                             <thead>
                             <tr>
+                                <th class="text-center"> <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"></th>
                                 <th>Nombre</th>
                                 <th>Descripcion</th>
-
+                                <th>Acciones</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,8 +52,13 @@
                                 
                                 foreach ($categorias_list as $row){ ?>
                                     <tr>
+                                        <td class="text-center"><input type="checkbox" name="selected[]" value="<?php echo $row['idCategoria'] ?>"></td>
                                         <td><?php echo $row['nombre'] ?></td>
                                         <td><?php echo $row['descripcion'] ?></td>
+                                        <td class="text-right">
+                                            <a href="<?php echo base_url();?>admin/categorias/delete/<?php echo $row['idCategoria'] ?>" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Eliminar"><i class="fa fa-trash"></i></a>
+                                            <!--<a href="<?php echo base_url();?>admin/productos/editar/<?php echo $row['idCategoria'] ?>" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Editar"><i class="fa fa-pencil"></i></a>-->
+                                        </td>
                                     </tr>
 
                                 <?php }
@@ -62,6 +69,7 @@
                         </table>
                         </div>
                     </div><!-- /.box-body -->
+                    </form>
                 </div><!-- /.box -->
 
 

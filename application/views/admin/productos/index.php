@@ -77,7 +77,8 @@
                                 <td class="text-left"><?php echo $row['marca'] ?></td>
                                 <td class="text-left"><?php echo $row['descripcion'] ?></td>
                                 <td class="text-left"><?php echo $row['stock'] ?></td>
-                                <td class="text-right"><a href="<?php echo base_url();?>admin/productos/delete/<?php echo $row['idProducto'] ?>" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Eliminar"><i class="fa fa-trash"></i></a>
+                                <td class="text-right">
+                                    <a href="<?php echo base_url();?>admin/productos/delete/<?php echo $row['idProducto'] ?>" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="Eliminar"><i class="fa fa-trash"></i></a>
                                     <a href="<?php echo base_url();?>admin/productos/editar/<?php echo $row['idProducto'] ?>" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Editar"><i class="fa fa-pencil"></i></a>
                                 </td>
                             </tr>

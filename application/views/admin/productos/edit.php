@@ -107,7 +107,13 @@
                             <div class="col-sm-5">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="inputIva" id="inputIva" value="1" <?php echo set_checkbox('inputIva',$precioVenta->conIva,true); ?>  > Iva incluido
+                                        <input type="checkbox" name="inputIva" id="inputIva" value="1" <?php if ($precioVenta->conIva == null) {
+                                            echo set_checkbox('inputIva', 1);
+                                        }else{
+                                            if ($precioVenta->conIva == 1) {
+                                                echo 'checked="checked"';
+                                            }
+                                        } ?>  > Iva incluido
                                     </label>
                                 </div>
                             </div>
@@ -125,24 +131,44 @@
 
 
                         <!-- ##############   CHECKBOX PROMOCION   ################-->
-
+                        
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="inputPromocion" value="1" id="inputPromocion" <?php echo set_checkbox('inputPromocion', $precioVenta->esPromocion,TRUE); ?> > Promocion
+                                        <input type="checkbox" name="inputPromocion" value="1" id="inputPromocion" <?php
+                                        if ($precioVenta->esPromocion == null) {
+                                            echo set_checkbox('inputPromocion', 1);
+                                        }else{
+                                            if ($precioVenta->esPromocion == 1) {
+                                                echo 'checked="checked"';
+                                            }
+                                        }?>
+                                        > Promocion
                                     </label>
                                 </div>
                             </div>
                         </div>
 
+                        <div id="fechas"
+                            <?php
+                            if ($precioVenta->esPromocion == null) {
+                                if (set_checkbox('inputPromocion', 1) == '') {
+                                    echo 'hidden';
+                                }
+                            }else{
+                                if ($precioVenta->esPromocion == 0) {
+                                    echo 'hidden';
+                                }
+                            }?>
 
-                        <div id="fechas"  <?php if($precioVenta->esPromocion == 0 || set_checkbox('inputPromocion', $precioVenta->esPromocion,TRUE) == ''){echo 'hidden';}; ?>>
+                        >
                             <div class="form-group" >
                                 <label for="inputDesde" class="col-sm-2 control-label">Desde</label>
 
                                 <div class="col-sm-10">
                                     <input type="date" class="form-control" name="inputDesde" value="<?php echo set_value('inputDesde',$precioVenta->fechaDesde); ?>" id="inputDesde">
+                                    <?php echo form_error('inputDesde', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
 
@@ -151,6 +177,7 @@
 
                                 <div class="col-sm-10">
                                     <input type="date" class="form-control" name="inputHasta" value="<?php echo set_value('inputHasta',$precioVenta->fechaHasta); ?>" id="inputHasta">
+                                    <?php echo form_error('inputHasta', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -170,7 +197,7 @@
                             <label class="col-sm-2 control-label">Imagenes</label>
 
                             <div class="col-sm-10">
-                                <input  name="upload[]"  multiple="multiple" class="file" type="file" accept="image/*">
+                                <input  name="upload[]"  multiple="multiple" id="upload" value="<?php echo set_value('upload');?>" class="file" type="file" accept="image/*">
                             </div>
                         </div>
 
@@ -206,7 +233,12 @@
             }
         });
 
-
+        var imagenesGuardadas = "<?php echo $imagenes?>";
+        
+        $(".file-input").removeClass("file-input-new");
+        
+        $(".file-preview-thumbnails").html(imagenesGuardadas);
+        
     });
 
     $( "#inputPrecioCompra" ).keyup(function() {

@@ -114,11 +114,11 @@
                     </ul>
                 </li>
 
-                <li <?php if($this->uri->segment(2) == 'mailbox'){echo 'class="treeview active"';}?>>
+               <!-- <li <?php if($this->uri->segment(2) == 'mailbox'){echo 'class="treeview active"';}?>>
                     <a href="<?php echo base_url()?>admin/mailbox">
                         <i class="fa fa-envelope"></i> <span>Mailbox</span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </section>

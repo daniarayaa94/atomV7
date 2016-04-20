@@ -106,7 +106,7 @@
                                 <div class="col-sm-5">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="inputIva" id="inputIva" value="true"> Iva incluido
+                                            <input type="checkbox" name="inputIva" id="inputIva" value="1" <?php echo set_checkbox('inputIva',1); ?> > Iva incluido
                                         </label>
                                     </div>
                                 </div>
@@ -149,18 +149,19 @@
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="inputPromocion" value="true" id="inputPromocion" value="<?php echo set_value('inputPromocion'); ?>"> Promocion
+                                            <input type="checkbox" name="inputPromocion" value="1" id="inputPromocion" <?php echo set_checkbox('inputPromocion',1); ?> > Promocion
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <div id="fechas" hidden>
+                            <div id="fechas" <?php if ( set_checkbox('inputPromocion',1) == ''){echo 'hidden';} ?>>
                                 <div class="form-group" >
                                     <label for="inputDesde" class="col-sm-2 control-label">Desde</label>
 
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="inputDesde" value="<?php echo set_value('inputDesde'); ?>" id="inputDesde">
+                                        <?php echo form_error('inputDesde', '<div class="error">', '</div>'); ?>
                                     </div>
                                 </div>
 
@@ -169,6 +170,7 @@
 
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="inputHasta" value="<?php echo set_value('inputHasta'); ?>" id="inputHasta">
+                                        <?php echo form_error('inputHasta', '<div class="error">', '</div>'); ?>
                                     </div>
                                 </div>
                                 

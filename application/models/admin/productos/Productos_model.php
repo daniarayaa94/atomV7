@@ -128,6 +128,89 @@ class Productos_model extends CI_Model {
 
     }
 
+    function updateProductos($id,$nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion)
+    {
+        $this->nombre   = $nombre;
+        $this->marca = $marca;
+        $this->descripcion    = $descripcion;
+        $this->stock   = $stock;
+
+        if ($imagenes == ''){
+            $imagenes = $this->getProductoById($id)->imagenes;
+        }
+
+        $this->imagenes = $imagenes;
+        $this->shortname = $shortname;
+        $this->idCategoria    = $categoria;
+
+        $this->db->update('producto', $this, array('idProducto' => $id));
+
+        
+        $this->updatePrecio($id,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion);
+
+    }
+
+    function updatePrecio($idProducto,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion){
+
+        $update = array(
+            'actual' => 0
+        );
+        $this->db->update('precio', $update, array('idProducto' => $idProducto));
+
+
+            if (!$conPromocion){
+                $fechaInicio = date("Y-m-d H:i:s");
+                $fechaFin   = null;
+                $conPromocion = 0;
+            }else{
+                $conPromocion = 1;
+            }
+
+            if ($conIva){
+                $conIva = 1;
+            }else{
+                $conIva = 0;
+            }
+
+            $data = array(
+                'idProducto' =>  $idProducto,
+                'fechaDesde' => $fechaInicio ,
+                'fechaHasta' => $fechaFin,
+                'esPromocion' => $conPromocion,
+                'tipo' => 'venta',
+                'valor' => $precioVenta,
+                'actual' => 1,
+                'conIva' => $conIva
+            );
+
+
+            /********************/
+
+            //Insert Precio Venta
+
+            $this->db->insert('precio', $data);
+
+            /********************/
+
+            //Insert Precio Promocion
+            if($conPromocion == 1){
+                $data['tipo']   = 'promocion';
+                $data['valor']   = $precioPromocion;
+
+                $this->db->insert('precio', $data);
+            }
+
+            /********************/
+
+            //Insert Precio Compra
+
+            $data['tipo']   = 'compra';
+            $data['valor']   = $precioCompra;
+
+            $this->db->insert('precio', $data);
+
+    }
+
     function deleteProducto($id)
     {
         $this->borrado = 1;

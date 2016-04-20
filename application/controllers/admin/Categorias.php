@@ -26,8 +26,6 @@ class Categorias extends CI_Controller {
 
     }
 
-
-
     public function agregarCategoria()
     {
 
@@ -61,5 +59,23 @@ class Categorias extends CI_Controller {
         redirect('admin/dashboard');
     }
 
+    public function delete($id = null){
+
+        $this->load->model('admin/productos/categorias_model','cate',TRUE);
+
+        if ($this->input->post()) {
+
+            foreach ($this->input->post('selected') as $catID) {
+                $this->cate->deleteCategoria($catID);
+            }
+
+        }elseif ($id != null){
+            $this->cate->deleteCategoria($id);
+        }
+
+        redirect("admin/categorias");
+
+
+    }
 
 }
