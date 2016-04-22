@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-md-6">
             <?php if ($imagenes) { ?>
-                <div class="row">
+                <div class="row" style="line-height: 200px;">
                     <img id="image_container" src="<?php echo $assets . $imagenes[0]; ?>"
-                         data-zoom-image="<?php echo $assets . $imagenes[0]; ?>"/>
+                         data-zoom-image="<?php echo $assets . $imagenes[0]; ?>" class="image_detail"/>
                 </div>
                 <div class="row" style="margin-top: 10px" id="galleria">
                     <?php foreach ($imagenes as $miniatura) { ?>
@@ -26,7 +26,7 @@
                 <div class="product-inner-price">
                     <ins><?php echo 'Código: ' . $producto->codigo; ?></ins>
                 </div>
-
+<!--
                 <form action="" class="cart">
                     <div class="quantity">
                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity"
@@ -34,6 +34,7 @@
                     </div>
                     <button class="add_to_cart_button" type="submit">Agregar al Carro</button>
                 </form>
+-->
 
                 <div role="tabpanel">
                     <ul class="product-tab" role="tablist">

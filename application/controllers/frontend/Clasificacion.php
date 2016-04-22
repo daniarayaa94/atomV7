@@ -109,7 +109,7 @@ class Clasificacion extends CI_Controller {
 
 
         $data['productos']        = $this->producto->get_all_prods($filters);
-        $data['subcategories']    = $this->categorias->get_sub_categories($categoria, $filters);
+        $data['subcategories']    = $this->categorias->get_sub_categories($filters);
 
 
         $data['content_for_layout'] = $this->load->view('frontend/clasificacion', $data, TRUE);

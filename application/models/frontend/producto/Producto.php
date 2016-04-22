@@ -12,7 +12,7 @@ class Producto extends CI_Model {
      * @return mixed
      */
     function get_all_prods($filter = array() ){
-        $this->db->select('*')->from('producto')->where(array('borrado'=>0));
+        $this->db->select('*,CHECK_PROMOCION(idProducto) as promocion')->from('producto')->where(array('borrado'=>0));
 
         if (!empty($filter['categoria'])){
             $this->db->where('idCategoria',$filter['categoria']);
@@ -49,6 +49,29 @@ class Producto extends CI_Model {
     }
 
 
+    function get_precio_venta($producto){
+        $query = $this->db->get_where('precio', array('idProducto'=>$producto, 'tipo'=> 'venta', 'actual' => 1));
+        $precios = $query->result();
+
+        if ($query->num_rows()==2){
+            if($precios[0]->esPromocion == 0){
+                return array('promocion'=>$precios[1], 'normal' =>$precios[0]);
+            }else{
+                return array('promocion'=>$precios[0], 'normal' =>$precios[1]);
+            }
+        }else{
+            return array('promocion'=>false, 'normal' =>$query->row());
+        }
+    }
+
+    public function ver($producto)
+    {
+       $this->db->query('call visitar_producto(?)', array('id'=>$producto));
+        if (mysqli_more_results($this->db->conn_id)){
+            mysqli_next_result($this->db->conn_id);
+        }
+    }
+
     /**
      * Devuelve el numero total de productos 'no borrados'
      *
@@ -71,9 +94,47 @@ class Producto extends CI_Model {
             $this->db->where("lower(nombre) like '".$data['name_prod']."%'");
         }
 
+        $this->db->where('borrado',0);
+
         $result = $this->db->get()->row();
 
         return $result->total;
+    }
+
+
+    public function most_views($cantidad)
+    {
+        $this->db->order_by('vecesVisto','DESC');
+        $this->db->limit($cantidad);
+        $query = $this->db->get_where('producto', array('borrado'=>0));
+
+        return $query->result();
+    }
+
+    public function newest($cantidad)
+    {
+        $this->db->order_by('idProducto','DESC');
+        $this->db->limit($cantidad);
+        $query = $this->db->get_where('producto', array('borrado'=>0));
+
+        return $query->result();
+    }
+
+    public function mas_vendidos($cantidad)
+    {
+        $this->db->order_by('vecesComprado','DESC');
+        $this->db->limit($cantidad);
+        $query = $this->db->get_where('producto', array('borrado'=>0));
+
+        return $query->result();
+    }
+
+    public function mas_cotizados($cantidad)
+    {
+        $query = $this->db->query('call mas_cotizados(?)', array('limite'=>$cantidad));
+        mysqli_next_result($this->db->conn_id);
+        return $query->result();
+
     }
 
 }

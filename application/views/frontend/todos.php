@@ -43,11 +43,20 @@
                 <div class="col-sm-3">
                     <div class="single-product">
                         <div class="product-f-image">
-                            <img src="<?php echo base_url() . 'assets/' . end($src); ?>" alt=""
-                                 style="width:100%; height:230px;">
+                            <div class="relative">
+                                <img src="<?php echo base_url() . 'assets/' . end($src); ?>" alt=""
+                                     style="width:100%; height:230px;">
+                                <div class="absolute">
+                                    <?php if (!empty($prod->promocion)) { ?>
+                                        <div style="margin-top: ;height:80px;width: 80px; background: red; border-radius: 70px;font-weight: bold;color: white;text-align: center; line-height: 80px;font-size: 35px; float:right;"> <?= '-'.$prod->promocion.'%'; ?> </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+
+
                             <div class="product-hover">
-                                <a class="add-to-cart-link" name="<?php echo $prod->nombre ?>"
-                                   id="<?php echo $prod->idProducto ?>"><i class="fa fa-shopping-cart"></i> Agregar</a>
+                                <!--<a class="add-to-cart-link" name="<?php //echo $prod->nombre ?>"
+                                   id="<?php //echo $prod->idProducto ?>"><i class="fa fa-shopping-cart"></i> Agregar</a>-->
                                 <a href="<?php echo $link_detalles . $prod->idProducto; ?>" class="view-details-link"><i
                                         class="fa fa-link"></i> Detalles</a>
                             </div>

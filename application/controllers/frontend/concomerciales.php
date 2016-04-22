@@ -1,19 +1,19 @@
 <?php
 
-class Detalles extends CI_Controller {
+class Concomerciales extends CI_Controller
+{
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function index($id)
+    public function index()
     {
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
-        $this->load->model('frontend/producto/producto');
+        $this->load->model('frontend/producto/Producto');
 
-        //master params
         $data['titulo'] = $this->enviroment->get_setting('shop_name');
 
         $data['categorias']     = $this->categorias->listar();
@@ -24,7 +24,6 @@ class Detalles extends CI_Controller {
 
         $data['url_filter']    = base_url().'frontend/todos/index/';
         $data['url_registro']  = base_url().'frontend/registro/index/';
-        $data['mostrar_carro'] = base_url().'frontend/cart/mostrar/';
 
         //cargar items en carro de compras
         $data['carrito']       = array();
@@ -35,6 +34,8 @@ class Detalles extends CI_Controller {
                 'cantidad' => $producto['qty'],
                 'rowid'    => $producto['rowid']);
         }
+
+        $data['mostrar_carro'] = base_url().'frontend/cart/mostrar/';
 
         //mostrar usuario y sesion iniciada
         if (!empty($this->session->userdata('usuario'))){
@@ -48,15 +49,9 @@ class Detalles extends CI_Controller {
         }
 
         //child view
-        $prod_information         = $this->producto->get_by_id($id);
-        $data['producto']         = $prod_information[0];
-        $data['imagenes']         = explode(';',$prod_information[0]->imagenes);
-        $data['assets']           = base_url().'assets/';
+        $data['image_folder'] = base_url().'public/frontend/images/';
 
-        $this->producto->ver($id);
-
-        $data['content_for_layout'] = $this->load->view('frontend/detalles', $data, TRUE);
+        $data['content_for_layout'] = $this->load->view('frontend/cond_comerciales', $data, TRUE);
         $this->load->view('layouts/frontend/master',$data);
     }
-
 }

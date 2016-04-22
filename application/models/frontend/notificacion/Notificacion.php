@@ -5,6 +5,10 @@ class Notificacion extends CI_Model {
         parent::__construct();
     }
 
+    function create($usuario, $data){
+        
+    }
+
     function get_not_read($usuario){
         $condiciones = array(
             "leida" => 0,

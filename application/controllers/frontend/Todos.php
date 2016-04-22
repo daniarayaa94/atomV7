@@ -18,7 +18,8 @@ class Todos extends CI_Controller
         //master params
         $data['titulo']           = $this->enviroment->get_setting('shop_name');
         $data['categorias']       = $this->categorias->listar();
-        $data['url']              = base_url()."frontend/todos/index/";
+        //$data['url']              = base_url()."frontend/todos/index/";
+        $data['url']              = base_url()."frontend/clasificacion/index/categoria/";
         $data['img_empty_cart']   = base_url().'assets/empty-shop.png';
         $data['cart_qty']         = $this->cart->total_items();
         $data['url_registro']     = base_url().'frontend/registro/index/';

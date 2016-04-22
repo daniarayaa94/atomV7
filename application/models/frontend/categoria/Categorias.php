@@ -42,6 +42,7 @@ class Categorias extends CI_Model {
                 LOWER(shortname) AS 'subcategoria',
                 (SELECT COUNT(idProducto) FROM producto WHERE
                   LOWER(shortname) = p.shortname and borrado = 0 ";
+
         if (!empty($filter['categoria'])){
             $sql.= " and idCategoria = ".$filter['categoria'].") AS 'total'
                 FROM

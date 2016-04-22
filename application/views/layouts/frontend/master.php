@@ -14,11 +14,12 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo base_url() ?>/public/admin/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/owl.carousel.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/estilos.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/responsive.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -36,17 +37,19 @@
 </head>
 
 <body>
-<div class="site-branding-area">
+<div class="site-branding-area"
+     style="background-image: url('<?= base_url() . 'public/frontend/images/header_background.png' ?>');background-color: #E9E9E9; ">
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
                     <h1><a href="<?php echo base_url() . 'frontend/'; ?>"
-                           style="color: #30BB39; font-weight: bold">a<span style="color: #000000"><b>tom</b></span></a>
+                           style="color: #30BB39; font-weight: bold"><img
+                                src="<?php echo base_url() . 'assets/atom_horizontal.png' ?>" style="height: 90px;"></a>
                     </h1>
                 </div>
             </div>
-            <div class="col-sm-5" style="margin-top: 45px;">
+            <div class="col-sm-5" style="margin-top: 70px;">
                 <div class="input-group">
                     <input id="search" type="text" class="form-control" placeholder="¿Podemos ayudarlo..?"/>
                       <span class="input-group-btn">
@@ -61,7 +64,7 @@
                     <div class="col-md-8">
                         <div class="shopping-item" id="cart">
                             <a>Ver Carrito <i class="fa fa-shopping-cart"></i> <span
-                                    class="product-count"><?= $cart_qty; ?></span></a>
+                                    class="product-count"><?php echo $cart_qty; ?></span></a>
                         </div>
                     </div>
                     <?php if (!empty($usuario)) { ?>
@@ -69,29 +72,31 @@
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <img
-                                    src="<?= $assets . (!empty($usuario->fotoPerfil) ? $usuario->fotoPerfil : 'prof.png'); ?>"
+                                    src="<?php echo $assets . (!empty($usuario->fotoPerfil) ? $usuario->fotoPerfil : 'prof.png'); ?>"
                                     alt=""
                                     style="height: 35px; width: 35px;"
-                                    />
-                                <?= $usuario->username; ?>
+                                />
+                                <?php echo $usuario->username; ?>
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                 <li><a href="#">Editar perfil</a></li>
                                 <li><a href="#">Mis cotizaciones</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="<?= $logout; ?>">Salir</a></li>
+                                <li><a href="<?php echo $logout; ?>">Salir</a></li>
                             </ul>
-                            <?php if (!empty($total_notif)){ ?>
-                                <span class="product-count" style="right: 5px;"><?= $total_notif; ?></span>
+                            <?php if (!empty($total_notif)) { ?>
+                                <span class="product-count" style="right: 5px;"><?php echo $total_notif; ?></span>
                             <?php } ?>
                         </div>
                     <?php } else { ?>
                         <div class="col-md-4 shopping-item" style="margin-left: 0;">
-                            <a href="<?= $url_registro; ?>" class="login">Login <i class="fa fa-key"></i></a>
+                            <a href="<?php echo $url_registro; ?>" class="login">Login <i class="fa fa-key"></i></a>
                         </div>
                     <?php } ?>
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -131,7 +136,7 @@
         <div class="col-sm-3 header">Eliminar</div>
     </div>
     <?php if (count($carrito) > 0) { ?>
-        <form action="<?php echo  $mostrar_carro; ?>" method="POST">
+        <form action="<?php echo $mostrar_carro; ?>" method="POST">
             <div id="shopping-cart-content">
                 <?php foreach ($carrito as $key => $item) { ?>
                     <div class="row">
@@ -181,7 +186,7 @@
                         entendemos que si cotiza productos con nosotros es porque lo necesita urgente, por ende,
                         le aseguramos que en menos de 24hr tendrá los productos en sus manos.
                     </p>
-                    <div class="footer-social">
+                    <div class="footer-social hidden">
                         <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
                         <a href="#" target="_blank"><i class="fa fa-youtube"></i></a>
@@ -195,10 +200,10 @@
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Servicio al Cliente</h2>
                     <ul>
-                        <li><a href="#">Despacho</a></li>
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="#">Cómo Comprar</a></li>
-                        <li><a href="#">Condicionnes comerciales</a></li>
+                        <li><a href="<?= base_url() . 'frontend/despacho'; ?>">Despacho</a></li>
+                        <li><a href="<?= base_url() . 'frontend/contacto'; ?>">Contacto</a></li>
+                        <li><a href="<?= base_url() . 'frontend/condiciones'; ?>">Cómo Comprar</a></li>
+                        <li><a href="<?= base_url() . 'frontend/concomerciales'; ?>">Condiciones comerciales</a></li>
                     </ul>
                 </div>
             </div>
@@ -207,7 +212,7 @@
                 <div class="footer-menu">
                     <h2 class="footer-wid-title">Contáctenos</h2>
                     <ul>
-                        <li><h2 style="color: #00a65a">(2) 6785876</h2></li>
+                        <li><h2 style="color: #00a65a"> (9) 5602 8588</h2></li>
                         <li><a href="https://mail.google.com/mail/?view=cm&fs=1&to=cotizaciones@atomoffice.cl">cotizaciones@atomoffice.cl</a>
                         </li>
                         <li><a href="#">Av. Vickuña Mackenna #4589.</a></li>
@@ -225,7 +230,9 @@
             <div class="col-md-8">
                 <div class="copyright">
                     <p>&copy; 2016 atom Office. Todos los derechos reservados. Creado con <i class="fa fa-heart"></i>
-                        por <a href="http://wpexpand.com" target="_blank">BlackRobot</a></p>
+
+                        por <a href="mailto:nicolasfabian.dm@gmail.com?subject=Enviado desde Atom Office."
+                               target="_blank">BlackRobot</a></p>
                 </div>
             </div>
         </div>
@@ -235,7 +242,7 @@
 <script type="application/javascript">
     //agregar al carro de cotzaciones
 
-    $(".add-to-cart-link").on('click', function (event) {
+    $("[class^='add_to_cart']").on('click', function (event) {
         var id = $(this).attr('id');
         var name = $(this).attr('name');
         var src = $(this).parent().parent().children().attr('src');

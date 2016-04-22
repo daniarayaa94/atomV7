@@ -1,1 +1,73 @@
-.muestra{ background-color: red; color:#ffffff;}
+.buy-conditions {
+    text-align: center;
+}
+
+.buy-conditions div.ocultar {
+    display: none;
+}
+
+.buy-conditions:hover div.ocultar {
+    display: block;
+    background: #9aec91;
+}
+
+.buy-conditions:hover > div {
+    display: none;
+}
+
+@-webkit-keyframes spinnerRotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinnerRotate {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-ms-keyframes spinnerRotate {
+    from {
+        -ms-transform: rotate(0deg);
+    }
+    to {
+        -ms-transform: rotate(360deg);
+    }
+}
+
+.buy-conditions:hover .spin {
+    -webkit-animation-name: spinnerRotate;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-iteration-count: 2;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spinnerRotate;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spinnerRotate;
+    -ms-animation-duration: 0.5s;
+    -ms-animation-iteration-count: 2;
+    -ms-animation-timing-function: linear;
+}
+
+.condicion1 {
+    font-size: 30px;
+    font-style: italic;
+    margin-top: 40px;
+}
+
+#compromiso {
+    font-family: 'Times New Roman';
+    font-size: 100px;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 85%;
+    color: #9aec91;
+}

@@ -27,12 +27,9 @@
                                     <div class="col-md-6 col-md-offset-6">
                                         <div class="slide-content">
                                             <h2>Tu tienes problemas, nosotros soluciones.</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur,
-                                                dolorem, excepturi. Dolore aliquam quibusdam ut quae iure vero
-                                                exercitationem ratione!</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi ab
-                                                molestiae minus reiciendis! Pariatur ab rerum, sapiente ex nostrum
-                                                laudantium.</p>
+                                            <p>¿Necesita una alfombra, alguna herramientas, instalar algo?</p>
+                                            <p>Contáctenos y cotice con nosotros, productos de calidad a buen precio y
+                                                entrega veloz garantizada, la solución a sus problemas de insumos.</p>
 
                                         </div>
                                     </div>
@@ -52,10 +49,10 @@
                                     <div class="col-md-6 col-md-offset-6">
                                         <div class="slide-content">
                                             <h2>Su negocio lo necesita, atom lo tiene.</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe
-                                                aspernatur, dolorum harum molestias tempora deserunt voluptas possimus
-                                                quos eveniet, vitae voluptatem accusantium atque deleniti inventore.
-                                                Enim quam placeat expedita! Quibusdam!</p>
+                                            <p>Cientos de productos que pueden estar mañana en su negocio. Vemos las
+                                                necesidades de nuestros clientes y en base
+                                                a ellas vamos ampliando nuestro catálogo: Aseo, papeleria, afombras,
+                                                herramientas; lo que usted necesite, Atom lo tiene.</p>
 
                                         </div>
                                     </div>
@@ -75,12 +72,11 @@
                                     <div class="col-md-6 col-md-offset-6">
                                         <div class="slide-content">
                                             <h2>De personas, para personas</h2>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores,
-                                                eius?</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti
-                                                voluptates necessitatibus dicta recusandae quae amet nobis sapiente
-                                                explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam
-                                                obcaecati suscipit sequi.</p>
+                                            <p>Como clientes también nos cansamos de tener que esperar y esperar lo que
+                                                necesitamos 'ahora'.</p>
+                                            <p>Nuestro comprmiso es la entrega rápida de productos de calidad y a
+                                                precios convemientes para todo bolsillo, basta de pagar demas, Atom
+                                                piensa en todos.</p>
 
                                         </div>
                                     </div>
@@ -137,101 +133,29 @@
                 <div class="latest-product">
                     <h2 class="section-title">Los más buscados</h2>
                     <div class="product-carousel">
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="<?= base_url() ?>public/frontend/images/product-1.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>
-                                        Detalles</a>
+                        <?php foreach ($mas_vistos as $popular) {
+                            $img = explode(';', $popular->imagenes); ?>
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    <img src="<?= $assets . end($img); ?>" style="width: 215px; height: 200px;">
+                                    <div class="product-hover">
+                                        <!--<a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>-->
+                                        <a href="<?= $mostrar_detalle . $popular->idProducto; ?>"
+                                           class="view-details-link"><i class="fa fa-link"></i>
+                                            Detalles</a>
+                                    </div>
                                 </div>
+
+                                <h2>
+                                    <a href="<?= $mostrar_detalle . $popular->idProducto; ?>"><?php echo $popular->nombre; ?></a>
+                                </h2>
+                                <p style="color: #00a157">
+                                    <a href="<?= $mostrar_detalle . $popular->idProducto; ?>"><?php echo 'Código: ' . $popular->codigo; ?></a>
+                                    <span class="pull-right" style="color: #0c0c0c"><i
+                                            class="fa fa-eye"></i><?= $popular->vecesVisto; ?></span>
+                                </p>
                             </div>
-
-                            <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
-
-                            <div class="product-carousel-price">
-
-                            </div>
-                        </div>
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="<?= base_url() ?>public/frontend/images/product-2.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>
-                                        Detalles</a>
-                                </div>
-                            </div>
-
-                            <h2><a href="single-product.html">Apple new mac book 2015 March :P</a></h2>
-                            <div class="product-carousel-price">
-
-                            </div>
-                        </div>
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="<?= base_url() ?>public/frontend/images/product-3.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>
-                                        Detalles</a>
-                                </div>
-                            </div>
-
-                            <h2><a href="single-product.html">Apple new i phone 6</a></h2>
-
-                            <div class="product-carousel-price">
-
-                            </div>
-                        </div>
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="<?= base_url() ?>public/frontend/images/product-4.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>
-                                        Detalles</a>
-                                </div>
-                            </div>
-
-                            <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-
-                            <div class="product-carousel-price">
-
-                            </div>
-                        </div>
-
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="<?= base_url() ?>public/frontend/images/product-5.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>
-                                        Detalles</a>
-                                </div>
-                            </div>
-
-                            <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
-
-                            <div class="product-carousel-price">
-                            </div>
-                        </div>
-
-                        <div class="single-product">
-                            <div class="product-f-image">
-                                <img src="<?= base_url() ?>public/frontend/images/product-6.jpg" alt="">
-                                <div class="product-hover">
-                                    <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                                    <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i>
-                                        Detalles</a>
-                                </div>
-                            </div>
-
-                            <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-
-                            <div class="product-carousel-price">
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
 
                 </div>
@@ -240,7 +164,7 @@
     </div>
 </div> <!-- End main content area -->
 
-<div class="brands-area">
+<!--<div class="brands-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
@@ -248,20 +172,20 @@
                 <div class="brand-wrapper">
                     <h2 class="section-title">Marcas</h2>
                     <div class="brand-list">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__1.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__2.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__3.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__4.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__1.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__2.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__3.jpg" alt="">
-                        <img src="<?= base_url() ?>public/frontend/images/services_logo__4.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__1.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__2.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__3.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__4.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__1.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__2.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__3.jpg" alt="">
+                        <img src="<?php //echo base_url() ?>public/frontend/images/services_logo__4.jpg" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div> <!-- End brands area -->
+</div>  End brands area -->
 
 <div class="product-widget-area">
     <div class="zigzag-bottom"></div>
@@ -271,80 +195,47 @@
                 <div class="single-product-widget">
                     <h2 class="product-wid-title">Más Vendidos</h2>
                     <a href="" class="wid-view-more">ver todos</a>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-1.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Sony Smart TV - 2015</a></h2>
+                    <?php foreach ($mas_vendidos as $vendido) {
+                        $img = explode(';', $vendido->imagenes); ?>
+                        <div class="single-wid-product">
+                            <a><img src="<?= $assets . end($img); ?>" alt="<?= end($img); ?>" class="product-thumb"></a>
+                            <h2><a href="<?= $mostrar_detalle . $vendido->idProducto ?>"><?= $vendido->nombre; ?></a>
+                            </h2>
 
-                        <div class="product-wid-price">
+                            <div class="product-wid-price">
+                            </div>
                         </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-2.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Apple new mac book 2015</a></h2>
-                        <div class="product-wid-rating">
-
-                        </div>
-                        <div class="product-wid-price">
-                        </div>
-                    </div>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-3.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Apple new i phone 6</a></h2>
-
-                        <div class="product-wid-price">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="single-product-widget">
-                    <h2 class="product-wid-title">Más cotizados</h2>
-                    <a href="#" class="wid-view-more">Ver todos</a>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-4.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-
-                    </div>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-1.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Sony Smart Air Condtion</a></h2>
-
-                    </div>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-2.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="single-product-widget">
                     <h2 class="product-wid-title">Más Nuevos</h2>
                     <a href="#" class="wid-view-more">Ver todos</a>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-3.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Apple new i phone 6</a></h2>
+                    <?php foreach ($mas_nuevos as $newest) {
+                        $img = explode(';', $newest->imagenes); ?>
+                        <div class="single-wid-product">
+                            <a><img src="<?= $assets . end($img); ?>" class="product-thumb"></a>
+                            <h2><a href="<?= $mostrar_detalle . $newest->idProducto; ?>"> <?= $newest->nombre; ?></a>
+                            </h2>
 
-                    </div>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-4.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Samsung gallaxy note 4</a></h2>
-
-                    </div>
-                    <div class="single-wid-product">
-                        <a><img src="<?= base_url() ?>public/frontend/images/product-thumb-1.jpg" alt=""
-                                class="product-thumb"></a>
-                        <h2><a href="single-product.html">Sony playstation microsoft</a></h2>
-
-                    </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Más cotizados</h2>
+                    <a href="#" class="wid-view-more">Ver todos</a>
+                    <?php foreach ($mas_cotizados as $cotizado) {
+                        $img = explode(';', $cotizado->imagenes); ?>
+                        <div class="single-wid-product">
+                            <a><img src="<?= $assets . end($img); ?>" alt="<?= end($img); ?>" class="product-thumb"></a>
+                            <h2>
+                                <a href="<?php echo $mostrar_detalle . $cotizado->idProducto; ?>"><?= $cotizado->nombre; ?></a>
+                            </h2>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

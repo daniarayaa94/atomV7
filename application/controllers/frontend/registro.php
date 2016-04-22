@@ -11,6 +11,8 @@ class Registro extends CI_Controller
     public function index()
     {
 
+        redirect(base_url().'frontend/');
+
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
         $this->load->model('frontend/producto/producto');

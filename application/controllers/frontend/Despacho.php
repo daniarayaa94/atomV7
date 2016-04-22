@@ -1,13 +1,12 @@
 <?php
 
-class Detalles extends CI_Controller {
+class Despacho extends CI_Controller{
 
-    public function __construct()
-    {
+    public function __construct()    {
         parent::__construct();
     }
 
-    public function index($id)
+    public function index()
     {
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
@@ -48,15 +47,9 @@ class Detalles extends CI_Controller {
         }
 
         //child view
-        $prod_information         = $this->producto->get_by_id($id);
-        $data['producto']         = $prod_information[0];
-        $data['imagenes']         = explode(';',$prod_information[0]->imagenes);
-        $data['assets']           = base_url().'assets/';
+        $data['image_folder']  =  base_url().'public/frontend/images/';
 
-        $this->producto->ver($id);
-
-        $data['content_for_layout'] = $this->load->view('frontend/detalles', $data, TRUE);
+        $data['content_for_layout'] = $this->load->view('frontend/despacho', $data, TRUE);
         $this->load->view('layouts/frontend/master',$data);
     }
-
 }
