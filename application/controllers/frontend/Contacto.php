@@ -56,13 +56,6 @@ class Contacto extends CI_Controller{
             $data['success'] = '';
         }
 
-        if (!empty($this->error['error_mail'])){
-            $data['error_mail'] = $this->error['error_mail'];
-            unset($this->error['error_mail']);
-        }else{
-            $data['error_mail'] = '';
-        }
-
         $data['recordados'] = $this->input->post();
 
         foreach ($this->error as $keyword_error => $error_message){

@@ -14,9 +14,6 @@
         <?php if ($success) { ?>
             <div class="alert alert-success"> <?= $success; ?> </div>
         <?php } ?>
-        <?php if ($error_mail) { ?>
-            <div class="alert alert-danger"> <?= $error_mail; ?> </div>
-        <?php } ?>
         <div class="col-sm-6">
             <h2>Nosotros</h2>
             <p>Atom &reg; piensa y se centra siempre en sus clientes. La idea y empresa en sí, nace al observar la
