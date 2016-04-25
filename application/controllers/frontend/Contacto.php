@@ -91,7 +91,7 @@ class Contacto extends CI_Controller{
             if ($send_result){
                 $this->session->set_userdata('success','Muchas gracias por su mensaje.');
             }else{
-                $data['error_mail'] = $send_result;
+                $this->error['error_mail'] = $send_result;
             }
 
             redirect(base_url().'frontend/contacto');
