@@ -56,7 +56,7 @@ class Contacto extends CI_Controller{
             $data['success'] = '';
         }
 
-        if ($this->error['error_mail']){
+        if (!empty($this->error['error_mail'])){
             $data['error_mail'] = $this->error['error_mail'];
             unset($this->error['error_mail']);
         }else{
