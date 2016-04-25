@@ -71,3 +71,11 @@
     line-height: 85%;
     color: #9aec91;
 }
+
+.filter-style{
+    padding: 20px;
+}
+
+#fil-hidden{
+    display: none ;
+}

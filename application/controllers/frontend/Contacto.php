@@ -56,6 +56,13 @@ class Contacto extends CI_Controller{
             $data['success'] = '';
         }
 
+        if ($this->error['error_mail']){
+            $data['error_mail'] = $this->error['error_mail'];
+            unset($this->error['error_mail']);
+        }else{
+            $data['error_mail'] = '';
+        }
+
         $data['recordados'] = $this->input->post();
 
         foreach ($this->error as $keyword_error => $error_message){
@@ -79,9 +86,14 @@ class Contacto extends CI_Controller{
             $mensaje = $post['txtMensaje']. "\r\n\r\n" .'Atte '.$post['txtEmail'];
             $header  = "From:". $post['txtNombre']." <".$post['txtEmail'].">\r\n";
 
-            mail($to, $subject, $mensaje, $header);
+            $send_result = mail($to, $subject, $mensaje, $header);
 
-            $this->session->set_userdata('success','Muchas gracias por su mensaje.');
+            if ($send_result){
+                $this->session->set_userdata('success','Muchas gracias por su mensaje.');
+            }else{
+                $data['error_mail'] = $send_result;
+            }
+
             redirect(base_url().'frontend/contacto');
         }else{
             $this->index();

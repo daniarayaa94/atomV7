@@ -84,7 +84,7 @@ z-index: 999;}
 
 .logo h1 {
     font-size: 40px;
-    margin: 40px 0;font-weight: 350;
+    margin: 40px 0;
 }
 .logo h1 a {
     color: #999;
@@ -97,9 +97,10 @@ z-index: 999;}
     border: 1px solid #ddd;
     float: right;
     font-size: 18px;
-    margin-top: 40px;
+    margin-top: 65px;
     padding: 10px;
     position: relative;
+    background: ghostwhite;
 }
 .shopping-item a {
     color: #666;
@@ -1114,7 +1115,7 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .profile{
     float: right;
     font-size: 18px;
-    margin-top: 40px;
+    margin-top: 60px;
     position: relative;
     border-radius: 0 ;
 }

@@ -34,6 +34,8 @@
             src="<?php echo base_url(); ?>public/frontend/js/Elevate_zoom/jquery-1.8.3.min.js" ?>"></script>
     <script type="application/javascript"
             src="<?php echo base_url(); ?>public/frontend/js/Elevate_zoom/jquery.elevatezoom.js" ?>"></script>
+    <script type="application/javascript"
+            src="<?php echo base_url(); ?>public/frontend/js/ajaxfunction.js" ?>"></script>
 </head>
 
 <body>
@@ -80,8 +82,8 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">Editar perfil</a></li>
-                                <li><a href="#">Mis cotizaciones</a></li>
+                                <!--<li><a href="#">Editar perfil</a></li>-->
+                                <li><a href="<?= base_url().'frontend/cotizaciones'; ?>">Mis cotizaciones</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo $logout; ?>">Salir</a></li>
                             </ul>
