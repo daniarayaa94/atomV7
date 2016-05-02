@@ -38,6 +38,7 @@ body {
 }
 
 
+
 .box-sidebar{
  height: 54px;
 }
@@ -1579,7 +1580,7 @@ a:focus {
   margin: 0;
 }
 .box .nav-stacked > li:last-of-type {
-  border-bottom: none;
+  border-bottom: 1px solid #f4f4f4;
 }
 .box.height-control .box-body {
   max-height: 300px;

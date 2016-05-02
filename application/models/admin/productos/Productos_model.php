@@ -6,9 +6,44 @@ class Productos_model extends CI_Model {
         parent::__construct();
     }
 
-    function getProductos(){
-        
-        $query = $this->db->get_where('producto', array('borrado' => 0));
+    function getProductos($filter = null){
+
+        $str_query = "select pro.idProducto, pro.nombre, pro.marca, pro.descripcion, pro.imagenes, pro.stock,
+                      (select valor from precio p WHERE pro.idProducto = p.idProducto and p.actual = 1 and p.tipo = 'venta') venta, 
+                      (select valor from precio p WHERE pro.idProducto = p.idProducto and p.actual = 1 and p.tipo = 'compra') compra  
+                      from producto pro  WHERE pro.borrado = 0 ";
+
+        if (!empty($filter['filter_compra'])){
+            $str_query .= " AND (select valor from precio p where pro.idProducto = p.idProducto and p.actual = 1 and p.tipo = 'compra') = ".$filter['filter_compra'];
+        }
+
+
+        if (!empty($filter['filter_venta'])){
+            $str_query .= " AND (select valor from precio p where pro.idProducto = p.idProducto and p.actual = 1 and p.tipo = 'venta') = ".$filter['filter_venta'];
+        }
+
+        if (!empty($filter['filter_nombre'])){
+            $str_query .= " AND lower(pro.nombre) like '".$filter['filter_nombre']."%'";
+        }
+
+        if (!empty($filter['filter_marca'])){
+            $str_query .= " AND lower(pro.marca) like '".$filter['filter_marca']."%'";
+        }
+
+        if (!empty($filter['filter_stock'])){
+            $str_query .= " AND pro.stock = ".$filter['filter_stock'];
+        }
+
+
+        if (isset($filter['start']) || isset($filter['limit'])) {
+            if ($filter['start'] < 0) {
+                $filter['start'] = 0;
+            }
+
+            $str_query .= "ORDER BY pro.nombre ASC LIMIT " . (int)$filter['start'] . "," . (int)$filter['limit'];
+        }
+
+        $query = $this->db->query($str_query);
 
         return $query->result_array();
         
@@ -52,9 +87,10 @@ class Productos_model extends CI_Model {
 
     }
 
-    function insertProductos($nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion)
+    function insertProductos($nombre,$codigo,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion)
     {
         $this->nombre   = $nombre;
+        $this->codigo   = $codigo;
         $this->marca = $marca;
         $this->descripcion    = $descripcion;
         $this->stock   = $stock;
@@ -128,9 +164,10 @@ class Productos_model extends CI_Model {
 
     }
 
-    function updateProductos($id,$nombre,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion)
+    function updateProductos($id,$nombre,$codigo,$marca,$descripcion,$stock,$shortname,$categoria,$imagenes,$precioCompra,$precioVenta,$fechaInicio,$fechaFin,$conPromocion,$conIva,$precioPromocion)
     {
         $this->nombre   = $nombre;
+        $this->codigo   = $codigo;
         $this->marca = $marca;
         $this->descripcion    = $descripcion;
         $this->stock   = $stock;

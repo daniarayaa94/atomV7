@@ -44,6 +44,17 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="inputCodigo" class="col-sm-2 control-label">Codigo</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="inputCodigo" value="<?php echo set_value('inputCodigo'); ?>" id="inputCodigo" placeholder="Codigo del producto">
+                                    <?php echo form_error('inputCodigo', '<div class="error">', '</div>'); ?>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
                                 <label for="inputMarca" class="col-sm-2 control-label">Marca</label>
 
                                 <div class="col-sm-10">
@@ -56,7 +67,7 @@
                                 <label for="inputDescripcion" class="col-sm-2 control-label">Descripcion</label>
 
                                 <div class="col-sm-10">
-                                    <textarea type="text" class="form-control" name="inputDescripcion" id="inputDescripcion" placeholder="Descripcion"><?php echo set_value('inputDescripcion'); ?></textarea>
+                                    <textarea type="text" class="form-control" name="inputDescripcion" id="inputDescripcion" rows="10" placeholder="Descripcion"><?php echo set_value('inputDescripcion'); ?></textarea>
                                     <?php echo form_error('inputDescripcion', '<div class="error">', '</div>'); ?>
                                 </div>
                             </div>
@@ -91,10 +102,7 @@
                                     </select>
                                 </div>
                             </div>
-
-
-
-
+                            
                             <div class="form-group">
                                 <label for="inputPrecio" class="col-sm-2 control-label">Precio Costo</label>
 

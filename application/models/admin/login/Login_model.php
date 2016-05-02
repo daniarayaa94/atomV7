@@ -12,7 +12,8 @@ class Login_model extends CI_Model {
         $this->db->select('idUsuario, nombre');
         $this->db->from('usuario');
         $this->db->where('username', $username);
-        $this->db->where('password', MD5($password));
+        $this->db->where('password', $this->encrypt_decrypt('encrypt',$password));
+        $this->db->where('idTipo', 2);
         $this->db->limit(1);
 
         $query = $this->db->get();
@@ -25,21 +26,28 @@ class Login_model extends CI_Model {
 
     }
 
-    function insert_entry()
-    {
-        $this->title   = $_POST['title']; // please read the below note
-        $this->content = $_POST['content'];
-        $this->date    = time();
+    function encrypt_decrypt($action, $string) {
+        $output = false;
 
-        $this->db->insert('usuario', $this);
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'abc123.As';
+        $secret_iv = 'abcd123.Asd';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        if( $action == 'encrypt' ) {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        }
+        else if( $action == 'decrypt' ){
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
     }
-
-    function update_entry()
-    {
-        $this->title   = $_POST['title'];
-        $this->content = $_POST['content'];
-        $this->date    = time();
-
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
-    }
+    
 }

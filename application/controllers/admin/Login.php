@@ -23,7 +23,6 @@ class Login extends CI_Controller {
 
 	}
 
-
     public function iniciar_sesion_post() {
         if ($this->input->post()) {
 
@@ -40,7 +39,8 @@ class Login extends CI_Controller {
                     'nombre' => $usuario->row()->nombre,
                     'logueado' => TRUE
                 );
-                $this->session->set_userdata($usuario_data);
+
+                $this->session->set_userdata('admin',$usuario_data);
 
                 redirect('admin/dashboard');
             } else {
@@ -51,20 +51,11 @@ class Login extends CI_Controller {
             $this->index();
         }
     }
-    public function logueado() {
-        if($this->session->userdata('logueado')){
-            $data = array();
-            $data['nombre'] = $this->session->userdata('nombre');
-            $this->load->view('admin/dashboard', $data);
-        }else{
-            redirect('admin');
-        }
-    }
+
+
     public function cerrar_sesion() {
-        $usuario_data = array(
-            'logueado' => FALSE
-        );
-        $this->session->set_userdata($usuario_data);
+
+        $this->session->unset_userdata('admin');
         redirect('admin');
     }
     

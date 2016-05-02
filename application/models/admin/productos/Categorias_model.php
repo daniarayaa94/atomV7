@@ -6,18 +6,20 @@ class Categorias_model extends CI_Model {
         parent::__construct();
     }
 
-    function getCategorias(){
 
-        $query = $this->db->get_where('categoria', array('borrado' => 0));
+    public function getCategorias($filter = null) {
+        
+        if (!empty($filter['ncategoria'])){
+            $this->db->where("lower(nombre) like '".$filter['ncategoria']."%'");
+        }
 
-        return $query->result_array();
+        $this->db->order_by('nombre','ASC');
 
-    }
+        if (isset($filter['start'])){
+            $this->db->limit( $filter['limit'],$filter['start']);
+        }
 
-    // Fetch data according to per_page limit.
-    public function fetch_data($per_page,$offset) {
 
-        $this->db->limit($per_page,$offset);
 
         $this->db->where('borrado', 0);
         $query = $this->db->get("categoria");

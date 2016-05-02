@@ -6,6 +6,13 @@ class Categorias extends CI_Controller {
     {
         parent::__construct();
         $this->load->library('pagination');
+
+        if (!sizeof($this->session->userdata('admin')) > 0){
+
+            redirect('admin/login');
+
+        }
+
     }
 
     public function index()
@@ -16,43 +23,51 @@ class Categorias extends CI_Controller {
     public function lista(){
         $this->load->model('admin/productos/categorias_model','cate',TRUE);
 
-        $data['categorias_list'] = $this->cate->getCategorias();
-
-        $total_row = sizeof($this->cate->getCategorias());
-
-        /*********************/
-
-        $config = array();
-        $config["base_url"] = base_url() . "admin/categorias/lista";
-        $config["total_rows"] = $total_row;
-        $config["per_page"] = 3;
-        $config['use_page_numbers'] = TRUE;
-        $config['num_links'] = $total_row;
-        $config['cur_tag_open'] = '&nbsp;<a class="current">';
-        $config['cur_tag_close'] = '</a>';
-        $config['next_link'] = 'Next';
-        $config['prev_link'] = 'Previous';
-
-        $this->pagination->initialize($config);
-        if($this->uri->segment(4)){
-            $page = ($this->uri->segment(4)) ;
-        }
-        else{
-            $page = 1;
-        }
-        
-        $offset = $page * $config["per_page"];
-
-        $data["offset"] = $offset;
-        $data["results"] = $this->cate->fetch_data($config["per_page"],$offset);
-        $str_links = $this->pagination->create_links();
-        $data["links"] = explode('&nbsp;',$str_links );
-        /*********************/
-
-
         $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
 
         $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
+
+        /*********************/
+        
+        $filters = array( 'ncategoria' => null);
+        $data['url_filter']       = base_url()."admin/categorias/lista/";
+
+        $ncategoria = trim($this->input->get('ncategoria'));
+
+        if (isset($ncategoria)) {
+            $filters['ncategoria'] = $ncategoria;
+        }
+
+
+        $total_row = sizeof($this->cate->getCategorias($filters));
+        $start = trim($this->input->get('per_page'));
+        
+        /* Paginacion */
+        $filters['start'] = isset($start) ? ($start) : 0;
+        $filters['limit'] = 10;
+
+        $opciones = array();
+        $opciones['per_page'] = $filters['limit'];
+
+        if(!empty($filters['ncategoria'])){
+            $opciones['base_url'] = base_url() . 'admin/categorias/lista/?ncategoria='.$filters['ncategoria'];
+        }else{
+            $opciones['base_url'] = base_url() . "admin/categorias/lista/";
+        }
+
+        $opciones['total_rows'] = $total_row;
+        $opciones['page_query_string'] = TRUE;
+        $opciones['uri_segment'] = isset($start) ? ($start) : 0 ;
+        $opciones['last_link'] = '>>';
+        $opciones['first_link'] = '<<';
+
+        $this->pagination->initialize($opciones);
+        $data["links"] = $this->pagination->create_links();
+        
+        $data['categorias_list'] = $this->cate->getCategorias($filters);
+        
+        /*********************/
+
 
         $data['content_for_layout'] = $this->load->view('admin/categorias/index', $data, TRUE);
 

@@ -10,8 +10,6 @@ class Mailbox extends CI_Controller {
         //$this->load->library('MailboxClass',$params);
         //$this->load->library('ImapMailbox');
 
-
-
         //$this->layout->setLayout('admin/headerMaster');
     }
 

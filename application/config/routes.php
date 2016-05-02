@@ -55,6 +55,7 @@ $route['404_override'] = '';
 /* Rutas para Frontend y Backend */
 $route['admin']                            = 'admin/login';
 $route['admin/dashboard']                  = 'admin/dashboard';
+
 $route['admin/(:any)']                     = 'admin/$1';
 
 $route['frontend']                         = 'frontend/index';

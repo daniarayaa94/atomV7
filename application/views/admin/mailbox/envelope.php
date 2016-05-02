@@ -14,18 +14,19 @@
                 <div>
                     <form action="<?php echo base_url();?>admin/mailbox/enviar" method="POST" enctype="multipart/form-data" >
                         <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Nuevo correo</h3>
-                            <div class="box-tools pull-right">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Nuevo correo</h3>
+                                <div class="box-tools pull-right">
 
-                                <div class="btn-group">
-                                    <button type="submit" class="btn btn-success"  data-toggle="tooltip" title="" data-original-title="Enviar">
-                                        <i class="fa fa-send-o"></i></button>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-success"  data-toggle="tooltip" title="" data-original-title="Enviar">
+                                            <i class="fa fa-send-o"></i></button>
+                                    </div>
                                 </div>
+                            </div><!-- /.box-header -->
 
-                            </div>
-                        </div><!-- /.box-header -->
-                        <div class="box-body no-padding">
+                            <div class="box-body no-padding">
+
                             <div class="mailbox-read-info">
                                 <div class="form-group">
                                     <input class="form-control" id="inputPara" placeholder="Para:" value="<?php if ($mail){echo $mail->remitente;} ?>">
@@ -34,6 +35,7 @@
                                     <input class="form-control" id="inpurAsunto" placeholder="Asunto:">
                                 </div>
                             </div><!-- /.mailbox-read-info -->
+
                             <div class="mailbox-read-message">
 
                                 <div class="form-group">
@@ -52,10 +54,9 @@
 
                             </div><!-- /.mailbox-read-message -->
                         </div><!-- /.box-body -->
-                    </div><!-- /. box -->
+                        </div><!-- /. box -->
                     </form>
                 </div><!-- /.col -->
-
             </div>
 
         </div><!-- /.row -->

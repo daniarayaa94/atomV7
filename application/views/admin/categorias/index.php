@@ -17,14 +17,39 @@
                 <div class="box">
 
                     <div class="box-header">
-                        <h3 class="box-title">Categorias</h3>
+                        <td><h3 class="box-title">Categorias</h3></td>
+
                         <!-- tools box -->
                         <div class="pull-right box-tools">
+                            <table>
+                                <tr>
+                                    <td  style="padding-right: 5px;">
+                                        <div class="box-tools">
+                                            
+                                                <div class="input-group input-group-sm" style="width: 150px;">
+                                                    <input type="text" name="search" id="search" class="form-control pull-right" placeholder="Buscar">
 
-                            <a href="<?php echo base_url();?>admin/categorias/agregarCategoria" class="btn btn-success"  data-toggle="tooltip" title="" data-original-title="Agregar Categoria">
-                                <i class="fa fa-plus"></i></a>
+                                                    <div class="input-group-btn">
+                                                        <button id="btn-filter" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            
 
-                            <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Está seguro que desea eliminar los productos seleccionados') ? $('#form-product').submit() : false;" data-original-title="Borrar producto"><i class="fa fa-trash-o"></i></button>
+                                        </div>
+                                    </td>
+
+                                    <td> <a href="<?php echo base_url();?>admin/categorias/agregarCategoria" class="btn btn-success"  data-toggle="tooltip" title="" data-original-title="Agregar Categoria">
+                                            <i class="fa fa-plus"></i></a>
+
+                                        <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Está seguro que desea eliminar los productos seleccionados') ? $('#form-product').submit() : false;" data-original-title="Borrar producto"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+
+
+
                             <!-- <button type="button" class="btn btn-danger btn-sm"  data-toggle="tooltip" title="" data-original-title="Eliminar">
                                 <i class="fa fa-trash-o"></i></button> -->
 
@@ -68,18 +93,15 @@
                             </tbody>
                         </table>
                         </div>
+
+                            <div class="col-sm-12">
+                                <div id="pagination" class="pull-right"> <?php echo $links; ?> </div>
+                            </div>
                     </div><!-- /.box-body -->
                     </form>
 
-                    <!--<?php echo json_encode($results).$offset;?>
-                    <div id="pagination">
-                        <ul class="tsc_pagination">
 
 
-                            <?php foreach ($links as $link) {
-                                //echo "<li>". $link."</li>";
-                            } ?>
-                    </div>-->
 
                 </div><!-- /.box -->
 
@@ -90,3 +112,14 @@
 
 
 </div><!-- /.content-wrapper -->
+
+<script>
+    $('#btn-filter').on('click', function () {
+        var text = $('#search').val();
+        if (text) {
+            location = "<?= $url_filter; ?>" + "?ncategoria=" + encodeURI(text);
+        }else{
+            location = "<?= $url_filter; ?>";
+        }
+    });
+</script>
