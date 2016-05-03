@@ -57,8 +57,11 @@ class Cotizaciones extends CI_Controller{
                 $filters['fecha_respuesta'] = $post['fil-fResp'];
             }
 
-            if (!empty($post['fil-Estado'])){
-                $filters['estado'] = $post['fil-Estado'];
+            if (!empty($uri_params['estado'])) {
+                $filters['estado'] = $uri_params['estado'];
+                $data['sel_estado'] = $uri_params['estado'];
+            }else{
+                $data['sel_estado'] = 'todos';
             }
 
 
@@ -89,14 +92,18 @@ class Cotizaciones extends CI_Controller{
         }
 
         //child view
-        $data['image_folder']  =  base_url().'public/frontend/images/';
-        $data['filter_url'] = base_url().'frontend/cotizaciones';
+        $data['image_folder']  = base_url().'public/frontend/images/';
+        $data['filter_url']    = base_url().'frontend/cotizaciones';
+        $data['url_detalles']  = base_url().'frontend/cotizaciones/mostrar_detalles';
 
+        $data['link_estado']   = base_url().'frontend/cotizaciones/index/estado/';
+        $data['link_no_estado']= base_url().'frontend/cotizaciones/';
 
         $data['content_for_layout'] = $this->load->view('frontend/mis_cotizaciones', $data, TRUE);
         $this->load->view('layouts/frontend/master',$data);
     }
 
+    //usado por ajax
     public function confirmar()
     {
         if ($this->input->server('REQUEST_METHOD') == 'POST'){
@@ -109,6 +116,51 @@ class Cotizaciones extends CI_Controller{
 
         }else{
             $this->index();
+        }
+    }
+
+    //usado por ajax
+    public function mostrar_detalles()
+    {
+        if ($this->input->server('REQUEST_METHOD') == 'POST'){
+
+            $this->load->model('frontend/categoria/categorias');
+            $this->load->model('frontend/producto/producto');
+            $this->load->model('frontend/cotizacion/Cotizacion');
+            $this->load->model('frontend/cotizacion/Detalle');
+
+            $id_cotizacion = $this->input->post('id');            
+            
+            $cotizacion = $this->Cotizacion->get_by_id($id_cotizacion);
+            $detalles   = $this->Detalle->get_by_cotizacion($id_cotizacion);
+
+            $tabla      =  "<h1>Detalles de Cotización</h1>";
+
+            $tabla      .= "<table class='table table-hover table-details' ><thead> %s </thead><tbody> %s </tbody></table>";
+            $rows = '';
+
+            if (!empty($cotizacion->fechaRespuesta)) {
+                $thead = "<tr><th>Imagen</th><th>Nombre</th><th>Marca</th><th>Cant.</th><th>$ Uni.</th><th>Subtotal</th></tr>";
+                foreach ($detalles as $detalle) {
+                    $imgs = explode(';', $detalle->imagenes);
+                    $img  = end($imgs);
+                    $rows .= "<tr><td><img src='".base_url()."assets/$img' class='img-responsive miniatura'></td><td>$detalle->nombre</td><td>$detalle->marca</td><td>$detalle->cantidad</td><td>$detalle->precioUnidad</td><td>$detalle->subtotal</td></tr>";
+                }
+            }else{
+                $thead = "<tr><th>Imagen</th><th>Nombre</th><th>Marca</th><th>Cant.</th></tr>";
+                foreach ($detalles as $detalle) {
+                    $imgs = explode(';', $detalle->imagenes);
+                    $img  = end($imgs);
+                    $rows .= "<tr><td><img src='".base_url()."assets/$img' class='recent-thumb'></td><td>$detalle->nombre</td><td>$detalle->marca</td><td>$detalle->cantidad</td></tr>";
+                }
+            }
+            
+            $tabla .= "<div class='row pull-right' style='margin-right:5px;'>
+                        <h3>Total:$ $cotizacion->total</h3>
+                        </div>";
+            echo sprintf($tabla, $thead, $rows);  
+        }else{
+            redirect(base_url().'frontend/');
         }
     }
 }
