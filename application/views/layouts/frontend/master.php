@@ -250,7 +250,7 @@
          type: 'POST',
          context: document.body,
          data: {id: id, name: name, imagen: src}
-         }).done(function (params) {
+         }).done(function (params) { 
          location.reload();
          });
     });
