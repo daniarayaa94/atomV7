@@ -119,7 +119,7 @@ class Cart extends CI_Controller
         } else {
             $this->cart->update($update_data);
         }
-        //$this->cart->destroy();
+        
         echo json_encode($this->cart->contents());
     }
 

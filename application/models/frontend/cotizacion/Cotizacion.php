@@ -14,7 +14,7 @@ class Cotizacion extends CI_Model
     }
 
     function get_all($data){
-        $this->db->select('cotizacion.fechaSolicitud,cotizacion.fechaRespuesta,estado.nombre as estado,cotizacion.idCotizacion,
+        $this->db->select('cotizacion.fechaSolicitud,cotizacion.fechaRespuesta,estado.nombre as estado,cotizacion.idCotizacion,estado.idEstado,
                             cotizacion.confirmationKey, cotizacion.total')->join('estado', 'cotizacion.idEstado = estado.idEstado');
 
         $this->db->where(array('idUsuario'=> $data['usuario'], 'total >' => 0));

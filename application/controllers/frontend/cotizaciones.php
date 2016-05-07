@@ -136,7 +136,7 @@ class Cotizaciones extends CI_Controller{
 
             $tabla      =  "<h1>Detalles de Cotización</h1>";
 
-            $tabla      .= "<table class='table table-hover table-details' ><thead> %s </thead><tbody> %s </tbody></table>";
+            $tabla      .= "<table class='table table-hover table-details' style='margin-top: 15px;' ><thead> %s </thead><tbody> %s </tbody></table>";
             $rows = '';
 
             if (!empty($cotizacion->fechaRespuesta)) {
@@ -144,18 +144,18 @@ class Cotizaciones extends CI_Controller{
                 foreach ($detalles as $detalle) {
                     $imgs = explode(';', $detalle->imagenes);
                     $img  = end($imgs);
-                    $rows .= "<tr><td><img src='".base_url()."assets/$img' class='img-responsive miniatura'></td><td>$detalle->nombre</td><td>$detalle->marca</td><td>$detalle->cantidad</td><td>$detalle->precioUnidad</td><td>$detalle->subtotal</td></tr>";
+                    $rows .= "<tr><td><img src='".base_url()."assets/$img' class='img-responsive miniatura'></td><td><a href='".base_url()."frontend/detalles/index/".$detalle->idProducto."'>$detalle->nombre</a></td><td>$detalle->marca</td><td>$detalle->cantidad</td><td>$detalle->precioUnidad</td><td>$detalle->subtotal</td></tr>";
                 }
             }else{
                 $thead = "<tr><th>Imagen</th><th>Nombre</th><th>Marca</th><th>Cant.</th></tr>";
                 foreach ($detalles as $detalle) {
                     $imgs = explode(';', $detalle->imagenes);
                     $img  = end($imgs);
-                    $rows .= "<tr><td><img src='".base_url()."assets/$img' class='recent-thumb'></td><td>$detalle->nombre</td><td>$detalle->marca</td><td>$detalle->cantidad</td></tr>";
+                    $rows .= "<tr><td><img src='".base_url()."assets/$img' class='recent-thumb'></td><td><a href='".base_url()."frontend/detalles/index/".$detalle->idProducto."'>$detalle->nombre</a></td><td>$detalle->marca</td><td>$detalle->cantidad</td></tr>";
                 }
             }
             
-            $tabla .= "<div class='row pull-right' style='margin-right:5px;'>
+            $tabla .= "<div class='row pull-right' style='padding-right:20px;'>
                         <h3>Total:$ $cotizacion->total</h3>
                         </div>";
             echo sprintf($tabla, $thead, $rows);  
