@@ -11,7 +11,7 @@ class Usuario extends CI_Controller {
 
         if (!sizeof($this->session->userdata('admin')) > 0){
 
-            redirect('admin/login');
+            //redirect('admin/login');
 
         }
 

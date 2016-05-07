@@ -8,9 +8,14 @@ class Cotizacion extends CI_Model
         parent::__construct();
     }
 
+    function get_by_id($cotizacion) {
+        $query = $this->db->get_where('cotizacion',array('idCotizacion'=>$cotizacion));
+        return $query->row(); 
+    }
+
     function get_all($data){
-        $this->db->select('cotizacion.fechaSolicitud,cotizacion.fechaRespuesta,estado.nombre as estado,cotizacion.idCotizacion')
-                 ->join('estado', 'cotizacion.idEstado = estado.idEstado');
+        $this->db->select('cotizacion.fechaSolicitud,cotizacion.fechaRespuesta,estado.nombre as estado,cotizacion.idCotizacion,
+                            cotizacion.confirmationKey, cotizacion.total')->join('estado', 'cotizacion.idEstado = estado.idEstado');
 
         $this->db->where(array('idUsuario'=> $data['usuario'], 'total >' => 0));
 
@@ -80,11 +85,24 @@ class Cotizacion extends CI_Model
         return $this->db->insert_id();
     }
 
+
     function confirmar_venta($cotizacion, $usuario){
         $this->db->query('call sp_confirmar_venta(?,?)', array('cotizacion'=>$cotizacion, "usuario"=>$usuario));
 
         if (mysqli_more_results($this->db->conn_id)){
             mysqli_next_result($this->db->conn_id);
         }
+    }
+
+    
+    function have_permission_for_show_price($cotizacion){
+        $this->db->query('call sp_check_cotizacion_confirmada_como_compra(?)', array('id'=>$cotizacion));
+        $result = ( $this->db->get()->row()->permission == 1 );
+
+        if (mysqli_more_results($this->db->conn_id)){
+            mysqli_next_result($this->db->conn_id);
+        }
+
+        return $result;
     }
 }

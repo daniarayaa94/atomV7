@@ -613,14 +613,16 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
     width: 100%;
 }
 .thubmnail-recent {
-    margin-bottom: 30px;
+    margin-bottom: 5px;
+    padding: 3px;
     overflow: hidden;
+    cursor: pointer;
 }
 .recent-thumb {
     float: left;
-    height: auto;
+    height: 100%;
     margin-right: 15px;
-    width: 63px;
+    width: 50px;
 }
 .thubmnail-recent > h2 {
     font-size: 20px;
@@ -628,6 +630,7 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
 }
 .thubmnail-recent > h2 a {
     color: #222;
+    text-decoration: none;
 }
 .product-sidebar-price > ins {
     color: #30BB39;
@@ -1159,4 +1162,9 @@ div.absolute {
     background: #bdbbbb;
     line-height: 100%;
     text-align: center;
+}
+
+.miniatura{
+  width: 80px;
+  height: 80px;
 }

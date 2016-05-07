@@ -97,7 +97,7 @@ class Registro extends CI_Controller
                     "correoContacto" => $post['txt_email'],
                     "direccion" => $post['txt_direccion'],
                     "username" => $post['txt_user'],
-                    "password" => md5($post['txt_pass']),
+                    "password" => $this->encrypt_decrypt("encrypt",$post['txt_pass']),
                     "idTipo" => 1,
                     "telefono" => $post['txt_cel']);
             } else {
@@ -108,7 +108,7 @@ class Registro extends CI_Controller
                     "correoContacto" => $post['txt_email'],
                     "direccion" => $post['txt_dir_emp'],
                     "username" => $post['txt_usuario'],
-                    "password" => md5($post['txt_clave']),
+                    "password" => $this->encrypt_decrypt("encrypt",$post['txt_clave']),
                     "telefono" => $post['txt_tel'],
                     "idTipo" => 1);
 
@@ -195,5 +195,28 @@ class Registro extends CI_Controller
         } else {
             return false;
         }
+    }
+    public function encrypt_decrypt($action, $string) {
+        $output = false;
+
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'abc123.As';
+        $secret_iv = 'abcd123.Asd';
+
+        // hash
+        $key = hash('sha256', $secret_key);
+
+        // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+        $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+        if( $action == 'encrypt' ) {
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        }
+        else if( $action == 'decrypt' ){
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
     }
 }

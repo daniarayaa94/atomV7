@@ -79,3 +79,24 @@
 #fil-hidden{
     display: none ;
 }
+
+.nav-sidebar a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.initial-container{
+    position: relative;
+}
+.child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    text-align: center;
+}
+
+.table-details{
+    text-align: left;
+    width: 100%;
+}

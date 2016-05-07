@@ -16,4 +16,12 @@ class Detalle extends CI_Model
         $this->db->insert('detalle_cotizacion', $info);
         return $this->db->insert_id();
     }
+
+    public function get_by_cotizacion($cotizacion)
+    {
+        $query = $this->db->query('CALL sp_get_info_cotizacion(?)', array('id'=>$cotizacion));
+        mysqli_next_result($this->db->conn_id);
+        
+        return $query->result();
+    }
 }

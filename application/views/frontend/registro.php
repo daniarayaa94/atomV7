@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="txt_user">Contraseña:</label>
-                        <input type="text" name="txt_pass" id="txt_pass" class="form-control"/>
+                        <input type="password" name="txt_pass" id="txt_pass" class="form-control"/>
                     </div>
                     <input type="submit" value="Ingresar"/>
                 </form>

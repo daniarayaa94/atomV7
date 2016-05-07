@@ -9,67 +9,102 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="filter-style">
-        <div class="row ">
-            <form action="<?= $filter_url; ?>" method="POST">
-                <div id="fil-hidden">
-                    <div class="col-sm-4">
-                        <label>Fecha Respuesta</label>
-                        <input class="form-control" type="date" name="fil-fResp"/>
-                    </div>
-                    <div class="col-md-4">
-                        <label>Estado de cotización</label>
-                        <select name="fil-Estado" class="form-control">
-                            <option value="">Seleccione</option>
-                            <?php foreach ($estados as $estado) { ?>
-                                <option value="<?= $estado->idEstado; ?>"><?= $estado->nombre; ?></option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <label>Fecha Solicitud</label>
-                <div class="input-group col-sm-4">
-                    <input id="search" type="date" class="form-control" name="fil-fsolicitud">
-              <span class="input-group-btn">
-                <button id="btn-filter" name="btn-filer" class="btn btn-success" ><i class="fa fa-search"></i> Buscar
-                </button>
-              </span>
-                </div>
-            </form>
-            <span id="advanced-filter" class="caret" style="color: #00CC00; cursor: pointer"></span>&nbsp Búsqueda
-            específica
-        </div>
-    </div>
-    <table class="table table-hover"> 
-        <thead>
-        <tr>
-            <th>Fecha Solicitud</th>
-            <th>Fecha Respuesta</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($mis_cotizaciones as $cotizacion) { ?>
+<div class="row" style="margin-top: 15px;">
+    <div class="col-sm-4">
+        <table class="table" style="max-height: 800px;">
             <tr>
-                <td><?= $cotizacion->fechaSolicitud; ?></td>
-                <td>
-                    <?= ($cotizacion->fechaRespuesta) ? $cotizacion->fechaRespuesta: "<label class='label label-warning'>Respuesta pendiente</label>"; ?>
-                </td>
-                <td><?= $cotizacion->estado; ?></td>
-                <td><a class="btn btn-primary" id="confirmar[]" name="<?= $cotizacion->idCotizacion; ?>"><i
-                            class="fa fa-check-circle"></i></a>
-                    <a class="btn btn-primary" id="<?= $cotizacion->idCotizacion; ?>"><i class="fa fa-eye"></i></a>
+                <td>Todas</td>
+                <td><select>
+                        <?php foreach ($estados as $estado) { ?>
+                        <option value="<?= $estado->idEstado; ?>"><?= $estado->nombre; ?></option>
+                        <?php } ?>
+                    </select>
                 </td>
             </tr>
-        <?php } ?>
-        </tbody>
-    </table>
-    <div class="col-sm-12" style="padding-right: 150px;">
-        <div id="pagination" class="pull-right"> <?php echo $paginacion; ?> </div>
+            <?php if ($mis_cotizaciones) { ?>
+                <?php foreach ($mis_cotizaciones as $cotizacion) { ?>
+                    <tr onclick="mostrar(<?= $cotizacion->idCotizacion; ?>)">
+                        <td><?php echo "<b>" . ucfirst(strtolower($cotizacion->estado)) . "</b><br>Solicitada: " . $cotizacion->fechaSolicitud; ?></td>
+                    </tr>
+                <?php } ?>
+            <?php } else { ?>
+                <tr>
+                    Sin resultados para mostrar.
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+
+
+    <div class="col-sm-4 sidebar hidden">
+        <ul class="nav nav-tabs ">
+            <li <?= ($sel_estado == 'todos') ? "class='active'" : ''; ?> ><a href="<?= $link_no_estado; ?>">Todas</a>
+            </li>
+            <?php foreach ($estados as $estado) { ?>
+                <li <?= ($sel_estado == $estado->idEstado) ? "class='active'" : ''; ?> ><a
+                        href="<?= $link_estado . $estado->idEstado; ?>"><?= $estado->nombre; ?></a></li>
+            <?php } ?>
+        </ul>
+        <ul class="single-sidebar">
+            <div style="margin-top: 20px;">
+                <?php if ($mis_cotizaciones) { ?>
+                    <?php foreach ($mis_cotizaciones as $cotizacion) { ?>
+                        <div class="thubmnail-recent" style="background-color: #dae0ed"
+                             onclick="mostrar(<?= $cotizacion->idCotizacion; ?>)">
+                            <?php switch (strtolower($cotizacion->estado)) {
+                                case 'solicitada': ?>
+                                    <img src="<?= $image_folder . 'arrow.png' ?>" class="recent-thumb" alt="">
+                                    <?= '<h2><a>Cotización Solicitada</a></h2>'; ?>
+                                    <?php break;
+                                case 'respondida': ?>
+                                    <img src="<?= $image_folder . 'arrowl.png' ?>" class="recent-thumb" alt="">
+                                    <?= '<h2><a>Cotización Respondida</a></h2>'; ?>
+                                    <?php break;
+                                case 'comprada': ?>
+                                    <img src="<?= $image_folder . 'dollar.png' ?>" class="recent-thumb" alt="">
+                                    <?= '<h2><a>Compra Realizada</a></h2>'; ?>
+                                    <?php break;
+                            } ?>
+                            <div class="product-sidebar-price">
+                                <?php switch (strtolower($cotizacion->estado)) {
+                                    case 'solicitada': ?>
+                                        <?= '<b>Fecha solicitud: </b>' . $cotizacion->fechaSolicitud; ?>
+                                        <?php break;
+                                    case 'respondida': ?>
+                                        <?= '<b>Fecha Solicitud: </b>' . $cotizacion->fechaSolicitud; ?><br>
+                                        <?= '<b>Fecha Respuesta: </b>' . $cotizacion->fechaRespuesta; ?>
+                                        <?php break;
+                                    case 'comprada': ?>
+                                        <?= '<b>Total: </b>' . $cotizacion->total; ?><br>
+                                        <?= '<b>Código Compra : </b>' . $cotizacion->confirmationKey; ?>
+                                        <?php break;
+                                } ?>
+                            </div>
+                            <a class="btn btn-primary" id="confirmar[]" name="<?= $cotizacion->idCotizacion; ?>"><i
+                                    class="fa fa-check-circle"></i></a>
+                        </div>
+                    <?php } ?>
+                <?php } else { ?>
+                    <div class="thubmnail-recent">
+                        Sin resultados para mostrar.
+                    </div>
+                <?php } ?>
+
+            </div>
+
+        </ul>
+    </div>
+    <div class="col-sm-8 child">
+        <div class="" id="container">
+            <img src="<?= $image_folder . 'iconcotizador.png'; ?>" style="width: 25%;">
+            <h1>Pinche una cotización para <br> poder ver sus detalles.</h1>
+            <p>Las cotizaciones que hayan sido
+                <br> respondidas por el administrador o confirmadas por usted como compras
+                <br> tendrán tambien el detalle de los precios y sus totales</p>
+        </div>
     </div>
 </div>
+
 <script type="application/javascript">
     $('#advanced-filter').on('click', function () {
         var display = $('#fil-hidden').css('display');
@@ -84,13 +119,23 @@
         var id = $(this).prop('name');
 
         $.post(
-            "<?= base_url().'frontend/cotizaciones/confirmar' ?>",
-            { id: id }
-        ).done(function() {
+            "<?= base_url() . 'frontend/cotizaciones/confirmar' ?>",
+            {id: id}
+        ).done(function () {
             $(event.target).removeClass('btn-primary');
             $(event.target).addClass('btn-success');
-             //$(this).css({background:'green'});
         });
 
     });
+
+    function mostrar(cotizacion) {
+        $.post(
+            '<?= $url_detalles ?>',
+            {id: cotizacion}
+            )
+            .done(function (resp) {
+                $('#container').parent().removeClass('child');
+                document.getElementById('container').innerHTML = resp;
+            });
+    }
 </script>
