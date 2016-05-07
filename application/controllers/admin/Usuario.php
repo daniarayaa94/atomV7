@@ -212,25 +212,6 @@ class Usuario extends CI_Controller {
 
             $imagenes = '';
 
-            /*if (sizeof($_FILES['upload']['name']) > 0) {
-
-                $imagenes = implode(";", $_FILES['upload']['name']);
-
-                $total = count($_FILES['upload']['name']);
-
-                for ($i = 0; $i < $total; $i++) {
-
-                    $tmpFilePath = $_FILES['upload']['tmp_name'][$i];
-
-                    if ($tmpFilePath != "") {
-                        $newFilePath = getcwd() . "/assets/" . $_FILES['upload']['name'][$i];
-
-                        move_uploaded_file($tmpFilePath, $newFilePath);
-                    }
-                }
-
-            }*/
-
             $this->usua->insertUsuario($inputNombre,$inputApellidos,$inputRut,$inputEmpresa,$inputUsername,$inputPassword,$inputEmail,$inputGenero,$inputDireccion,$inputTelefono,$imagenes);
 
             redirect("admin/usuario");

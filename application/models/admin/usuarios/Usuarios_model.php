@@ -69,7 +69,7 @@ class Usuarios_model extends CI_Model {
         $this->password = $inputPassword;
         $this->correoContacto = $inputEmail;
         $this->genero    = $inputGenero;
-        $this->idTipo    = 2;
+        $this->idTipo    = 1;
         $this->direccion    = $inputDireccion;
         $this->telefono    = $inputTelefono;
         $this->fotoPerfil    = $imagenes;
@@ -88,7 +88,7 @@ class Usuarios_model extends CI_Model {
         $this->password = $inputPassword;
         $this->correoContacto = $inputEmail;
         $this->genero    = $inputGenero;
-        $this->idTipo    = 2;
+        $this->idTipo    = 1;
         $this->direccion    = $inputDireccion;
         $this->telefono    = $inputTelefono;
         $this->fotoPerfil    = $imagenes;

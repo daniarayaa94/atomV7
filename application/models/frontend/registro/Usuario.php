@@ -25,6 +25,7 @@ class Usuario extends CI_Model {
         $query = $this->db->get_where('usuario', array('username'=>$user,"password = " . $this->encrypt_decrypt("encrypt", $pass)) );
         $result['status'] = ( $query->num_rows() == 1);
         $result['data']   = $query->row();
+        
 
         return $result;
     }

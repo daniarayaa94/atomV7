@@ -13,6 +13,12 @@ class Cart extends CI_Controller
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
         $this->load->model('frontend/producto/producto');
+        
+        if ($this->session->userdata('usuario') != null) {
+
+            $data = $this->enviroment->getNotificaciones($this->session->userdata('usuario')->idUsuario);
+
+        }
 
         //master params
         $data['titulo'] = $this->enviroment->get_setting('shop_name');

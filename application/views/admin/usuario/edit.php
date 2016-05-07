@@ -76,7 +76,7 @@
                             <label for="inputPassword" class="col-sm-2 control-label">Contraseña</label>
 
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" name="inputPassword" value="<?php echo set_value('inputPassword',$usuario->password); ?>" id="inputPassword" placeholder="Contraseña">
+                                <input type="text" class="form-control" name="inputPassword" value="<?php echo set_value('inputPassword',$usuario->password); ?>" id="inputPassword" placeholder="Contraseña">
                                 <?php echo form_error('inputPassword', '<div class="error">', '</div>'); ?>
                             </div>
                         </div>

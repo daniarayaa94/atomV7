@@ -18,4 +18,19 @@ class Enviroment extends CI_Model {
 
     }
 
+
+    function getNotificaciones($id)
+    {
+        $str_query = "select * from notificacion where idUsuario=".$id;
+
+        $query = $this->db->query($str_query);
+        
+        $data['countNotificaciones'] = sizeof($query->result_array());
+        
+        $data['notificaciones_list'] = $query->result_array();
+
+        return $data;
+
+    }
+
 }

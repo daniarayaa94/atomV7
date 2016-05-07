@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/estilos.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/frontend/css/responsive.css">
+
+    <link rel="stylesheet" href="<?php echo base_url()?>/public/admin/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>/public/admin/dist/css/AdminLTE.css">
+
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,7 +56,7 @@
                     </h1>
                 </div>
             </div>
-            <div class="col-sm-5" style="margin-top: 70px;">
+            <div class="col-sm-3" style="margin-top: 70px;">
                 <div class="input-group">
                     <input id="search" type="text" class="form-control" placeholder="¿Podemos ayudarlo..?"/>
                       <span class="input-group-btn">
@@ -61,40 +66,67 @@
                 </div>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         <div class="shopping-item" id="cart">
                             <a>Ver Carrito <i class="fa fa-shopping-cart"></i> <span
                                     class="product-count"><?php echo $cart_qty; ?></span></a>
                         </div>
                     </div>
                     <?php if (!empty($usuario)) { ?>
-                        <div class="dropdown col-sm-4 profile">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <img
-                                    src="<?php echo $assets . (!empty($usuario->fotoPerfil) ? $usuario->fotoPerfil : 'prof.png'); ?>"
-                                    alt=""
-                                    style="height: 35px; width: 35px;"
-                                />
-                                <?php echo $usuario->username; ?>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <!--<li><a href="#">Editar perfil</a></li>-->
-                                <li><a href="<?= base_url().'frontend/cotizaciones'; ?>">Mis cotizaciones</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="<?php echo $logout; ?>">Salir</a></li>
-                            </ul>
-                            <?php if (!empty($total_notif)) { ?>
-                                <span class="product-count" style="right: 5px;"><?php echo $total_notif; ?></span>
-                            <?php } ?>
+
+                        <div class="col-md-5">
+                            <div class="shopping-item">
+
+                                <a id="dropdownMenu1" data-toggle="dropdown" > <?php echo $usuario->username; ?>
+                                    <i style="width: 40px;height: 25.4px;line-height: 25.4px;" class="fa fa-user"></i>
+                                    <span class="product-count"><?php echo $cart_qty; ?></span></a>
+
+                                <ul class="dropdown-menu nav nav-pills nav-stacked" aria-labelledby="dropdownMenu1">
+                                    <!--<li><a href="#">Editar perfil</a></li>-->
+                                    <li ><a style="color: black;" href="<?= base_url().'frontend/cotizaciones'; ?>">Mis cotizaciones</a></li>
+                                    <li ><a style="color: black;"  href="<?php echo $logout; ?>">Salir</a></li>
+                                </ul>
+
+                            </div>
                         </div>
+
+                        <div class="col-md-2">
+                            <div class="shopping-item">
+                                <a data-toggle="dropdown"> <i style="width: 40px;height: 25.4px;line-height: 25.4px;" class="fa fa-bell-o"></i> <span
+                                        class="product-count"><?php echo $countNotificaciones; ?></span></a>
+
+                                <ul class="dropdown-menu nav nav-pills nav-stacked">
+
+                                    <?php if (sizeof($notificaciones_list) <= 0 ) { ?>
+                                        <li><a style="color: black; cursor: pointer;">Sin Resultados</a></li>
+                                        <?php
+                                    }else {
+                                        foreach ($notificaciones_list as $noti) { ?>
+                                            <li>
+                                                <a style="color: black; cursor: pointer;"><?= $noti['texto']; ?></a>
+                                            </li>
+                                            <li class="list-seperator"></li>
+                                        <?php }
+                                    }?>
+
+                                </ul>
+                            </div>
+                        </div>
+
+
+
+
+
+
                     <?php } else { ?>
-                        <div class="col-md-4 shopping-item" style="margin-left: 0;">
+
+                        <div class="col-md-3 shopping-item" style="margin-left: 0;">
                             <a href="<?php echo $url_registro; ?>" class="login">Login <i class="fa fa-key"></i></a>
                         </div>
+
+
                     <?php } ?>
                 </div>
 
@@ -120,7 +152,7 @@
                     <li><a href="<?php echo base_url() . 'frontend/'; ?>"><?php echo strtolower($titulo); ?></a></li>
                     <?php foreach ($categorias as $category) { ?>
                         <li>
-                            <a href="<?php echo $url . $category['idCategoria']; ?>"><?php echo ucfirst(strtolower($category['nombre'])); ?></a>
+                            <a href="<?php echo $url . $category['idCategoria']; ?>"><?php echo (ucfirst(strtolower($category['nombre']))); ?></a>
                         </li>
                     <?php } ?>
                 </ul>
