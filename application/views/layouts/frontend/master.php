@@ -240,23 +240,26 @@
         </div>
     </div>
 </div> <!-- End footer bottom area -->
+<script type="application/javascript">
+    $("[class^='add-to-cart']").on('click', function (event) {
+        var id = $(this).attr('id');
+         var name = $(this).attr('name');
+         var src = $(this).parent().parent().children().attr('src');
+         $.ajax({
+         url: "<?php echo  base_url() . 'frontend/cart/agregar' ?>",
+         type: 'POST',
+         context: document.body,
+         data: {id: id, name: name, imagen: src}
+         }).done(function (params) { 
+         location.reload();
+         });
+    });
+</script>
 
 <script type="application/javascript">
     //agregar al carro de cotzaciones
 
-    $("[class^='add_to_cart']").on('click', function (event) {
-        var id = $(this).attr('id');
-        var name = $(this).attr('name');
-        var src = $(this).parent().parent().children().attr('src');
-        $.ajax({
-            url: "<?= base_url() . 'frontend/cart/agregar' ?>",
-            type: 'POST',
-            context: document.body,
-            data: {id: id, name: name, imagen: src}
-        }).done(function (params) {
-            location.reload();
-        });
-    });
+
     //Buscar productos
     $('#btn-filter').on('click', function () {
         var text = $('#search').val();
