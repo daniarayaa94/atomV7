@@ -96,22 +96,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-6">
-                <div class="single-promo">
-                    <i class="fa fa-refresh"></i>
-                    <p>Siempre Disponibles</p>
-                </div>
+                <a href="<?= base_url() . 'frontend/contacto'; ?>" style="color: white">
+                    <div class="single-promo">
+                        <i class="fa fa-refresh"></i>
+                        <p>Siempre Disponibles</p>
+                    </div>
+                </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="single-promo">
-                    <i class="fa fa-truck"></i>
-                    <p>Free shipping Santiago</p>
-                </div>
+                <a href="<?= base_url() . 'frontend/despacho'; ?>" style="color: white">
+                    <div class="single-promo">
+                        <i class="fa fa-truck"></i>
+                        <p>Free shipping Santiago</p>
+                    </div>
+                </a>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="single-promo">
-                    <i class="fa fa-lock"></i>
-                    <p>Seriedad y Confianza</p>
-                </div>
+                <a href="<?= base_url() . 'frontend/concomerciales'; ?>" style="color: white">
+                    <div class="single-promo">
+                        <i class="fa fa-lock"></i>
+                        <p>Seriedad y Confianza</p>
+                    </div>
+                </a>
             </div>
             <a href="<?= $mostrar_todos; ?>" style="color: white">
                 <div class="col-md-3 col-sm-6">
@@ -139,7 +145,8 @@
                                 <div class="product-f-image">
                                     <img src="<?= $assets . end($img); ?>" style="width: 215px; height: 200px;">
                                     <div class="product-hover">
-                                        <a class="add-to-cart-link" id="<?= $popular->idProducto; ?>" name="<?= $popular->nombre; ?>"
+                                        <a class="add-to-cart-link" id="<?= $popular->idProducto; ?>"
+                                           name="<?= $popular->nombre; ?>"
                                         ><i class="fa fa-shopping-cart"></i> Agregar</a>
                                         <a href="<?= $mostrar_detalle . $popular->idProducto; ?>"
                                            class="view-details-link"><i class="fa fa-link"></i>

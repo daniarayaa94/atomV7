@@ -15,24 +15,24 @@
     <div class="col-sm-3 cart-title">Cantidad</div>
     <div class="col-sm-2 cart-title">Eliminar</div>
 
-    <?php foreach ($productos_en_carrito as $item) { ?>
+    <?php foreach ($carrito as $item) { ?>
         <div class="row" style="margin-top: 5px;">
             <div class="col-sm-2">
-                <img src="<?= $item['img']; ?>" class="img-responsive">
+                <img src="<?= $item['imagen']; ?>" class="img-responsive" style="width: 70px;height: 70px;">
             </div>
             <div class="col-sm-5">
-                <h5><?= $item['name']; ?></h5>
+                <h5><?= $item['nombre']; ?></h5>
                 <div class="row">
                     <div class="col-sm-6">
-                        <a href="">Codigo:</a>
+                        <a href="<?= $link_mostrar_detalles.$item['id']; ?>">Codigo: <?= $item['codigo']; ?></a>
                     </div>
                     <div class="col-sm-6">
-                        <p>Marca</p>
+                        <p>Marca <br> <?= $item['marca']; ?></p>
                     </div>
                 </div>
             </div>
             <div class="col-sm-3">
-                <input type="text" value="<?= $item['qty']; ?>" class="form-control"/>
+                <input type="text" value="<?= $item['cantidad']; ?>" class="form-control"/>
             </div>
             <div class="col-sm-2">
                 <i class="fa fa-trash"></i>

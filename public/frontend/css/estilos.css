@@ -100,3 +100,12 @@
     text-align: left;
     width: 100%;
 }
+
+.detail-add:hover{
+    cursor: pointer;
+    background: #bdbbbb;
+}
+
+.detail-add:active{
+    background:#30BB39 ;
+}

@@ -26,20 +26,18 @@
                 <div class="product-inner-price">
                     <ins><?php echo 'Código: ' . $producto->codigo; ?></ins>
                 </div>
-<!--
-                <form action="" class="cart">
-                    <div class="quantity">
-                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity"
-                               min="1" step="1">
-                    </div>
-                    <button class="add_to_cart_button" type="submit">Agregar al Carro</button>
-                </form>
--->
 
                 <div role="tabpanel">
                     <ul class="product-tab" role="tablist">
+                        <li role="presentation"><a type="submit" class="add-to-cart-link detail-add"
+                                                   name="<?php echo $producto->nombre ?>"
+                                                   id="<?php echo $producto->idProducto ?>"
+                                                   role="tab" data-toggle="tab"
+                                                   title="Click para agregar al carro"><i
+                                    class="fa fa-shopping-cart"></i> Agregar</a></li>
                         <li role="presentation" class="active">
-                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descripción del Producto</a>
+                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Descripción del
+                                Producto</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -51,6 +49,37 @@
 
             </div>
         </div>
+    </div>
+    <div class="row" style="margin-top: 20px;">
+        <h1>Productos relacionados</h1>
+        <?php if ($relacionados) { ?>
+            <?php foreach ($relacionados as $prod) {?>
+                <?php $img = explode(';', $prod->imagenes); ?>
+                <div class="col-sm-3">
+                    <div class="single-product">
+                        <div class="product-f-image">
+                            <img src="<?= $assets . end($img); ?>" style="width: 215px; height: 200px;">
+                            <div class="product-hover">
+                                <a class="add-to-cart-link" id="<?= $prod->idProducto; ?>" name="<?= $prod->nombre; ?>"
+                                ><i class="fa fa-shopping-cart"></i> Agregar</a>
+                                <a href="<?= $mostrar_detalle . $prod->idProducto; ?>"
+                                   class="view-details-link"><i class="fa fa-link"></i>
+                                    Detalles</a>
+                            </div>
+                        </div>
+
+                        <h2>
+                            <a href="<?= $mostrar_detalle . $prod->idProducto; ?>"><?php echo $prod->nombre; ?></a>
+                        </h2>
+                        <p style="color: #00a157">
+                            <a href="<?= $mostrar_detalle . $prod->idProducto; ?>"><?php echo 'Código: ' . $prod->codigo; ?></a>
+                        </p>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <p>No tenemos productos relacionados a este.</p>
+        <?php } ?>
     </div>
 </div>
 <br>

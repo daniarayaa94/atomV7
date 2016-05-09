@@ -45,7 +45,7 @@ class Producto extends CI_Model {
     function get_by_id($id){
         $query = $this->db->select('*')->from('producto')->where(array('idProducto'=>$id))->get();
 
-        return $query->result();
+        return $query->row();
     }
 
 
@@ -135,6 +135,12 @@ class Producto extends CI_Model {
         mysqli_next_result($this->db->conn_id);
         return $query->result();
 
+    }
+
+    public function get_relacionados($producto, $limite = 3){
+        $query = $this->db->query("CALL sp_get_relacionados(?,?)", array("productoID"=>$producto, "limite"=>$limite));
+        mysqli_next_result($this->db->conn_id);
+        return $query->result();
     }
 
 }

@@ -56,9 +56,11 @@ class Detalles extends CI_Controller {
 
         //child view
         $prod_information         = $this->producto->get_by_id($id);
-        $data['producto']         = $prod_information[0];
-        $data['imagenes']         = explode(';',$prod_information[0]->imagenes);
+        $data['relacionados']     = $this->producto->get_relacionados($id);
+        $data['producto']         = $prod_information;
+        $data['imagenes']         = explode(';',$prod_information->imagenes);
         $data['assets']           = base_url().'assets/';
+        $data['mostrar_detalle']  = base_url().'frontend/detalles/index/';
 
         $this->producto->ver($id);
 

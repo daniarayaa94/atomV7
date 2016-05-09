@@ -30,6 +30,63 @@ class Usuario extends CI_Model {
         return $result;
     }
 
+    function update($idUsuario,$data){
+        $raw_query_update_user = "UPDATE usuario SET %s WHERE idUsuario = %d ";
+        $attribs = array();
+        $result = false;
+        
+        if (!empty($data['nombre'])){
+            $attribs[] = "nombre = ". $this->db->escape($data['nombre']);
+        }
+
+        if (!empty($data['apellidos'])){
+            $attribs[] = "apellidos = ". $this->db->escape($data['apellidos']);
+        }
+
+        if (!empty($data['username'])){
+            $attribs[] = "username = ". $this->db->escape($data['username']);
+        }
+
+        if (!empty($data['password'])){
+            $attribs[] = "password = ". $this->encrypt_decrypt("encrypt",$this->db->escape($data['password']));
+        }
+
+        if (!empty($data['correoContacto'])){
+            $attribs[] = "correoContacto = ". $this->db->escape($data['correoContacto']);
+        }
+
+        if (!empty($data['genero'])){
+            $attribs[] = "genero = ". $this->db->escape($data['genero']);
+        }
+
+        if (!empty($data['rut'])){
+            $attribs[] = "rut = ". $this->db->escape($data['rut']);
+        }
+
+        if (!empty($data['direccion'])){
+            $attribs[] = "direccion = ". $this->db->escape($data['direccion']);
+        }
+
+        if (!empty($data['telefono'])){
+            $attribs[] = "telefono = ". $this->db->escape($data['telefono']);
+        }
+
+        if (count($attribs) > 0 ){
+            $query = sprintf($raw_query_update_user, implode(",", $attribs), $idUsuario);
+            $result = $this->db->query($query);
+        }
+
+        return $result;
+    }
+
+    function get_user_by_id($idUsuario){
+        $query = $this->db->get_where('usuario', array("idUsuario"=>$idUsuario));
+
+        $result = $query->row();
+
+        return $result;
+    }
+
     public function encrypt_decrypt($action, $string) {
         $output = false;
 

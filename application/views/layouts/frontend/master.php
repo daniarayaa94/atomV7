@@ -84,7 +84,7 @@
                                     <span class="product-count"><?php echo $cart_qty; ?></span></a>
 
                                 <ul class="dropdown-menu nav nav-pills nav-stacked" aria-labelledby="dropdownMenu1">
-                                    <!--<li><a href="#">Editar perfil</a></li>-->
+                                    <li ><a style="color: black;" href="<?= base_url().'frontend/perfil'; ?>">Editar perfil</a></li>
                                     <li ><a style="color: black;" href="<?= base_url().'frontend/cotizaciones'; ?>">Mis cotizaciones</a></li>
                                     <li ><a style="color: black;"  href="<?php echo $logout; ?>">Salir</a></li>
                                 </ul>
@@ -274,9 +274,10 @@
 </div> <!-- End footer bottom area -->
 <script type="application/javascript">
     $("[class^='add-to-cart']").on('click', function (event) {
-        var id = $(this).attr('id');
+         var id = $(this).attr('id');
          var name = $(this).attr('name');
          var src = $(this).parent().parent().children().attr('src');
+
          $.ajax({
          url: "<?php echo  base_url() . 'frontend/cart/agregar' ?>",
          type: 'POST',
