@@ -55,9 +55,6 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-    define('SMTP_USER','dani.glover@gmail.com');
-    define('SMTP_PASSWORD','5539741');
-
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING

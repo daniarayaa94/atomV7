@@ -27,6 +27,8 @@ class Categorias extends CI_Controller {
 
         $data['shop_name'] = $this->configuraciones->get_config('shop_name')->row()->valor;
 
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
+        
         /*********************/
         
         $filters = array( 'ncategoria' => null);
@@ -77,6 +79,7 @@ class Categorias extends CI_Controller {
     public function agregarCategoria()
     {
         $this->load->library('form_validation');
+        
 
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
         $this->form_validation->set_rules('inputDescripcion', 'Descripcion', 'required');
@@ -91,7 +94,8 @@ class Categorias extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
             $data['content_for_layout'] = $this->load->view('admin/categorias/agregarCategorias', $data, TRUE);
-
+            
+            $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
             $this->load->view('layouts/admin/headerMaster', $data);
         }else{
             $this->guardar();
@@ -177,7 +181,7 @@ class Categorias extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['content_for_layout'] = $this->load->view('admin/categorias/edit', $data, TRUE);
-
+            $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
             $this->load->view('layouts/admin/headerMaster',$data);
         }else
         {

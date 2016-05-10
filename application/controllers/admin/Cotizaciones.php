@@ -67,7 +67,7 @@ class Cotizaciones extends CI_Controller {
         /***************************FIN PAGINACION******************************/
 
         $data['content_for_layout'] = $this->load->view('admin/cotizaciones/cotizaciones', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 
@@ -126,7 +126,7 @@ class Cotizaciones extends CI_Controller {
         /***************************FIN PAGINACION******************************/
 
         $data['content_for_layout'] = $this->load->view('admin/cotizaciones/historialCotizaciones', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 
@@ -155,8 +155,7 @@ class Cotizaciones extends CI_Controller {
         $objPHPExcel->getActiveSheet()->setTitle('Cotizacion');
 
         $objPHPExcel->getActiveSheet()->setCellValue('C14', $cotizacion->nombre);
-        //$objPHPExcel->getActiveSheet()->setCellValue('C6', $cotizacion->fechaSolicitud);
-        //$objPHPExcel->getActiveSheet()->setCellValue('C8', $cotizacion->comentarios);
+
 
         $cell = 22;
 
@@ -185,18 +184,11 @@ class Cotizaciones extends CI_Controller {
             $cell++;
         }
 
-        //$objPHPExcel->getActiveSheet()->setCellValue('G'.$cell, 'Total');
-        //$objPHPExcel->getActiveSheet()->getStyle('G'.$cell)->getFont()->setSize(12);
-        //$objPHPExcel->getActiveSheet()->getStyle('G'.$cell)->getFont()->setBold(true);
-
         $cell += 2;
         $objPHPExcel->getActiveSheet()->setCellValue('G' . $cell, $cotizacion->total);
 
         $filename = 'Cotizacion_' . str_replace(' ', '_', $cotizacion->nombre) . '.xls';
 
-        //header('Content-Type: application/vnd.ms-excel'); //mime type
-        //header('Content-Disposition: attachment;filename="'.$filename.'"');
-        //header('Cache-Control: max-age=0'); //no cache
         if ($tipo == null) {
 
             $objPHPExcel = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
@@ -214,12 +206,14 @@ class Cotizaciones extends CI_Controller {
     
     public function enviarCorreo(){
 
+        $this->load->model('admin/configuraciones/config_model','configuraciones',TRUE);
+
         $config = Array(
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 465,
-            'smtp_user' => SMTP_USER,
-            'smtp_pass' => SMTP_PASSWORD,
+            'smtp_user' => $this->configuraciones->get_config('smtp_user')->row()->valor,
+            'smtp_pass' => $this->configuraciones->get_config('smtp_pass')->row()->valor,
             'mailtype'  => 'html',
             'charset'   => 'iso-8859-1'
         );
@@ -231,10 +225,10 @@ class Cotizaciones extends CI_Controller {
 
         $cotizacion = $this->coti->getCotizacionById($this->input->post('idCot'));
 
-        $this->email->from(SMTP_USER, 'Atom');
+        $this->email->from($this->configuraciones->get_config('smtp_user')->row()->valor, 'Atom');
         $this->email->to($cotizacion->correoContacto);
         $this->email->subject('Respuesta cotizacion atom');
-        $this->email->message($this->input->post('edit1'));
+        $this->email->message($this->input->post('editor1'));
         $this->email->attach($this->crearExcel($this->input->post('idCot')));
         $this->email->send();
 

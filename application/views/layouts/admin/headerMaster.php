@@ -81,7 +81,7 @@
                 <ul class="nav navbar-nav">
                     <li>
 
-                        <a href="<?php base_url();?>login/cerrar_sesion"><span class="hidden-xs hidden-sm hidden-md">Cerrar sesion </span> <i class="fa fa-sign-out fa-lg"></i></a>
+                        <a href="<?= $url_logout?>"><span class="hidden-xs hidden-sm hidden-md">Cerrar sesion </span> <i class="fa fa-sign-out fa-lg"></i></a>
                     </li>
                 </ul>
             </div>

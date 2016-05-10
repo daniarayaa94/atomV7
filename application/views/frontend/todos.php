@@ -52,11 +52,9 @@
                                     <?php } ?>
                                 </div>
                             </div>
-
-
                             <div class="product-hover">
-                                <!--<a class="add-to-cart-link" name="<?php //echo $prod->nombre ?>"
-                                   id="<?php //echo $prod->idProducto ?>"><i class="fa fa-shopping-cart"></i> Agregar</a>-->
+                                <a class="add-to-cart-link" name="<?php echo $prod->nombre ?>"
+                                   id="<?php echo $prod->idProducto ?>"><i class="fa fa-shopping-cart"></i> Agregar</a>
                                 <a href="<?php echo $link_detalles . $prod->idProducto; ?>" class="view-details-link"><i
                                         class="fa fa-link"></i> Detalles</a>
                             </div>

@@ -77,7 +77,7 @@
             </div>
         </div>
         
-        <input type="submit" value="Guardar Cambios"/>
+        <input style="margin-top: 10px;margin-bottom: 10px" type="submit" value="Guardar Cambios"/>
     </form>
 
 

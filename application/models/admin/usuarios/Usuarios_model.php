@@ -41,6 +41,16 @@ class Usuarios_model extends CI_Model {
         return $query->result_array();
 
     }
+    
+    function validateUsername($username){
+        $finder = $this->db->get_where('usuario',array('username'=>$username))->result();
+        if (count($finder) == 0){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 
     public function getTipos() {
 
@@ -88,7 +98,6 @@ class Usuarios_model extends CI_Model {
         $this->password = $inputPassword;
         $this->correoContacto = $inputEmail;
         $this->genero    = $inputGenero;
-        $this->idTipo    = 1;
         $this->direccion    = $inputDireccion;
         $this->telefono    = $inputTelefono;
         $this->fotoPerfil    = $imagenes;

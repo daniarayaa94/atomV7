@@ -29,6 +29,7 @@ class Cart extends CI_Controller
         $data['url_registro'] = base_url() . 'frontend/registro/index/';
         $data['mostrar_carro'] = base_url() . 'frontend/cart/mostrar/';
         $data['logout']   = base_url().'frontend/Registro/logout';
+        $data['url_filter']   = '';
 
         //cargar items en carro de compras
         $data['carrito'] = array();
@@ -167,6 +168,8 @@ class Cart extends CI_Controller
             $data = array('rowid' => $this->input->post('rowid'),
                 'qty' => 0
             );
+
+
             $this->cart->update($data);
         } else {
             redirect(base_url() . 'frontend');

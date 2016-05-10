@@ -87,7 +87,7 @@ class Usuario extends CI_Controller {
         /***************************FIN PAGINACION******************************/
 
         $data['content_for_layout'] = $this->load->view('admin/usuario/index', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 
@@ -101,10 +101,12 @@ class Usuario extends CI_Controller {
 
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
         $this->form_validation->set_rules('inputRut', 'Rut', 'required');
-        $this->form_validation->set_rules('inputUsername', 'Username', 'required');
         $this->form_validation->set_rules('inputPassword', 'Password', 'required');
         $this->form_validation->set_rules('inputEmail', 'email', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+        $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
+
+        $this->form_validation->set_rules('inputUsername', 'Username', 'callback_username_check');
 
         $this->form_validation->set_message('required', '* Debes completar este campo.');
 
@@ -113,6 +115,7 @@ class Usuario extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['content_for_layout'] = $this->load->view('admin/usuario/agregarUsuario', $data, TRUE);
+            $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
             $this->load->view('layouts/admin/headerMaster',$data);
 
         }
@@ -123,6 +126,20 @@ class Usuario extends CI_Controller {
 
 
 
+
+    }
+
+    public function username_check($str)
+    {
+        $this->load->model('admin/usuarios/usuarios_model','usua',TRUE);
+
+        if (!$this->usua->validateUsername($str))
+        {
+            $this->form_validation->set_message('username_check', 'El username ya existe');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
 
     }
 
@@ -225,10 +242,12 @@ class Usuario extends CI_Controller {
 
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
         $this->form_validation->set_rules('inputRut', 'Rut', 'required');
-        $this->form_validation->set_rules('inputUsername', 'Username', 'required');
+
         $this->form_validation->set_rules('inputPassword', 'Password', 'required');
         $this->form_validation->set_rules('inputEmail', 'email', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+
+        $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
 
         $this->form_validation->set_message('required', '* Debes completar este campo.');
 
@@ -238,11 +257,15 @@ class Usuario extends CI_Controller {
 
         $usuario = $this->usua->getUsuarioById($id);
 
+        if ($this->input->post()){
+            if($usuario->username != $this->input->post('inputUsername')){
+                $this->form_validation->set_rules('inputUsername', 'Username', 'callback_username_check');
+            }
+        }
+        
         $usuario->password = $this->encrypt_decrypt('decrypt',$usuario->password);
 
         $data['usuario'] = $usuario;
-
-        $imagen = '';
         
         $data['idUsuario'] = $id;
 
@@ -251,7 +274,7 @@ class Usuario extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['content_for_layout'] = $this->load->view('admin/usuario/edit', $data, TRUE);
-
+            $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
             $this->load->view('layouts/admin/headerMaster',$data);
         }else
         {

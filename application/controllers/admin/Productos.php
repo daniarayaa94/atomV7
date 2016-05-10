@@ -105,7 +105,7 @@ class Productos extends CI_Controller {
         /***************************FIN PAGINACION******************************/
 
         $data['content_for_layout'] = $this->load->view('admin/productos/index', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 
@@ -146,6 +146,7 @@ class Productos extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['content_for_layout'] = $this->load->view('admin/productos/agregarProductos', $data, TRUE);
+            $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
             $this->load->view('layouts/admin/headerMaster',$data);
             
         }
@@ -369,7 +370,7 @@ class Productos extends CI_Controller {
         if ($this->form_validation->run() == FALSE)
         {
             $data['content_for_layout'] = $this->load->view('admin/productos/edit', $data, TRUE);
-
+            $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
             $this->load->view('layouts/admin/headerMaster',$data);
         }else
         {

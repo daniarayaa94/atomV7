@@ -30,7 +30,7 @@ class Mailbox extends CI_Controller {
         $data['bandeja'] = 'Recibidos';
 
         $data['content_for_layout'] = $this->load->view('admin/mailbox/index', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 
@@ -51,7 +51,7 @@ class Mailbox extends CI_Controller {
         $data['bandeja'] = 'Enviados';
 
         $data['content_for_layout'] = $this->load->view('admin/mailbox/index', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 
@@ -89,7 +89,7 @@ class Mailbox extends CI_Controller {
         }
 
         $data['content_for_layout'] = $this->load->view('admin/mailbox/envelope', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
 
         /* Inicio de Inbox (Recuperacion de correos)
@@ -167,7 +167,7 @@ class Mailbox extends CI_Controller {
         $data['mail'] = $this->mailbox->getMailById($id);
 
         $data['content_for_layout'] = $this->load->view('admin/mailbox/readmail', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
     }
 

@@ -85,7 +85,7 @@
 
         <div class="box-footer" id="descargar" hidden>
             <a class="btn btn-success" id="download" data-toggle="tooltip" title="" data-original-title="Descargar excel">
-                                            <i class="fa fa-cloud-download"></i> Descargar excel</a>
+                                            <i class="fa fa-file-excel-o"></i> Descargar excel</a>
         </div>
 
         <div class="form-group" id="respuesta">

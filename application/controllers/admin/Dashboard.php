@@ -25,7 +25,7 @@ class Dashboard extends CI_Controller {
         //$this->layout->view('index',$data);
 
         $data['content_for_layout'] = $this->load->view('admin/dashboard/index', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/headerMaster',$data);
 	}
     

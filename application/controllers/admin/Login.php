@@ -17,7 +17,7 @@ class Login extends CI_Controller {
         $data['titulo'] = $this->configuraciones->get_config('shop_name')->row()->valor;
 
         $data['content_for_layout'] = $this->load->view('admin/login/index', $data, TRUE);
-
+        $data['url_logout'] = base_url()."admin/login/cerrar_sesion";
         $this->load->view('layouts/admin/header_login',$data);
 
 

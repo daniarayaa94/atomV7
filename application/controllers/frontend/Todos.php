@@ -14,10 +14,10 @@ class Todos extends CI_Controller
         $this->load->model('frontend/enviroment');
         $this->load->model('frontend/categoria/categorias');
         $this->load->model('frontend/producto/producto');
-        
-        if ($this->session->userdata('usuario')['status']){
 
-            $data = $this->enviroment->getNotificaciones($this->session->userdata('usuario')['idUsuario']);
+        if ($this->session->userdata('usuario') != null) {
+
+            $data = $this->enviroment->getNotificaciones($this->session->userdata('usuario')->idUsuario);
 
         }
 

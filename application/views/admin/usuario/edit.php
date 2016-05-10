@@ -151,18 +151,5 @@
         </div><!-- /.row -->
     </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
-<script>
 
-    $(document).ready(function(){
-
-        var imagenesGuardadas = "<?php echo $imagenes?>";
-
-        $(".file-input").removeClass("file-input-new");
-
-        $(".file-preview-thumbnails").html(imagenesGuardadas);
-
-    });
-
-
-</script>
 
